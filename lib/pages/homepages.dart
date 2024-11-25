@@ -37,6 +37,7 @@ class _HomePagesState extends State<HomePages> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffFFFBEE),
+      appBar: appBar(),
       body: Stack(
         children: [
           SafeArea(
@@ -49,7 +50,9 @@ class _HomePagesState extends State<HomePages> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _searchField(),
-                    const SizedBox(width: 40),
+                    const SizedBox(
+                      width: 40,
+                    ),
                     _imageSliderbox(),
                     const SizedBox(
                       width: 40,
@@ -68,20 +71,50 @@ class _HomePagesState extends State<HomePages> {
     );
   }
 
-  Container ListMovie() {
+  AppBar appBar() {
+    return AppBar(
+      centerTitle: true,
+      title: Text(
+        "Cinema Application",
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      ),
+      backgroundColor: Color(0xffFFFBEE),
+    );
+  }
+
+  Container listMovie() {
     return Container(
       height: 350,
       width: 450,
       color: Color(0xffA7D4CB),
-      child: Column(
+      child: Row(
+        mainAxisAlignment:
+            MainAxisAlignment.spaceBetween, // Places widgets at both ends
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Explore Movies",
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontSize: 18
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Explore Movies",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Montserrat-Bold"
+              ),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.9, right: 8, left: 8, bottom: 8),
+            child: Text(
+              "See All",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: "Montserrat-SemiBold",
+                color: Colors.white,
+                fontSize: 14,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -98,7 +131,7 @@ class _HomePagesState extends State<HomePages> {
                 blurRadius: 3,
                 offset: const Offset(3, 2))
           ]),
-      child: ListMovie(),
+      child: listMovie(),
     );
   }
 
@@ -207,8 +240,8 @@ class _HomePagesState extends State<HomePages> {
                           padding: const EdgeInsets.only(right: 10),
                           child: SvgPicture.asset(
                             'assets/icon/Search.svg',
-                            width: 24,
-                            height: 24,
+                            width: 15,
+                            height: 15,
                           ),
                         )
                       : null,
