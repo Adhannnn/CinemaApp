@@ -15,13 +15,13 @@ class AllMovie {
 
     listing.add(AllMovie(
         moviename: 'Black Panther : \nWakanda Forever',
-        images: 'assets/images/blackpanther.jpg',
+        images: 'assets/images/blackpanther.jpeg',
         rate: '5.0',
         genre: 'Action'));
 
     listing.add(AllMovie(
         moviename: 'Agak Laen',
-        images: 'assets/images/spiderman.jpg',
+        images: 'assets/images/spidermanposter.jpg',
         rate: '4.0',
         genre: 'Action'));
 
