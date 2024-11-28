@@ -18,8 +18,7 @@ class _SearhfieldpagesState extends State<Searchfieldpages> {
         backgroundColor: Color(0xffF5F0E0),
         leading: GestureDetector(
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Homepages()));
+            Navigator.of(context).pop();
           },
           child: Container(
               width: 40,

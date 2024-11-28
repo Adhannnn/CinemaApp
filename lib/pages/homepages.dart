@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:cinema_application/models/listallmovie.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cinema_application/models/listmovie.dart';
@@ -15,12 +18,14 @@ class Homepages extends StatefulWidget {
 class _HomepagesState extends State<Homepages> {
   late List<MovieList> listmoviefirst;
   late List<AllMovie> allmovie;
+  late List<Listallmovie> showMovie = [];
 
   @override
   void initState() {
     super.initState();
     listmoviefirst = MovieList.getList();
     allmovie = AllMovie.getList();
+    showMovie = Listallmovie.getMovie() ?? [];
   }
 
   @override
@@ -170,6 +175,7 @@ class _HomepagesState extends State<Homepages> {
     );
   }
 
+  // This is for the AppBar
   AppBar appBar() {
     return AppBar(
       centerTitle: true,
@@ -246,6 +252,7 @@ class _HomepagesState extends State<Homepages> {
     );
   }
 
+   // this is for the image slider
   Widget _imageSlider() {
     return CarouselSlider.builder(
       itemCount: listmoviefirst.length,
@@ -326,13 +333,16 @@ class _HomepagesState extends State<Homepages> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "See All",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Montserrat-SemiBold",
-                    color: Colors.white,
-                    fontSize: 14,
+                child: GestureDetector(
+                  onTap: () {
+                    showallmovie(context);
+                  },
+                  child: Text(
+                    "See All",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: "Montserrat-SemiBold",
+                        color: Colors.white),
                   ),
                 ),
               ),
@@ -352,6 +362,98 @@ class _HomepagesState extends State<Homepages> {
         ],
       ),
     );
+  }
+
+  // show the movie in the See All Container
+  void showallmovie(BuildContext context) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel: "BlurredDialog",
+        transitionDuration: Duration(milliseconds: 300),
+        pageBuilder: (context, anim1, anim2) {
+          return Stack(
+            children: [
+              Positioned.fill(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                  child: Container(
+                    color: Colors.black.withOpacity(0.4),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  height: 645,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      color: Color(0xffFFFDF7),
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Choose a Movie",
+                              style: TextStyle(
+                                fontFamily: "Montserrat-SemiBold",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconButton(
+                              icon: Icon(Icons.close),
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                          )
+                        ],
+                      ),
+                      Expanded(
+                        child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 3),
+                          itemCount: showMovie.length,
+                          itemBuilder: (context, index) {
+                            var movie = showMovie[index];
+                            return Column(
+                              children: [
+                                SizedBox(
+                                    height: 130,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(6),
+                                      child: Container(
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          image: AssetImage(movie.pathImage),
+                                          fit: BoxFit.cover,
+                                        )),
+                                      ),
+                                    ))
+                              ],
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          );
+        });
   }
 
   // Movie Card Widget

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfilePages extends StatefulWidget {
-  ProfilePages({super.key});
+  const ProfilePages({super.key});
 
   @override
   State<ProfilePages> createState() => _ProfilePagesState();
@@ -9,7 +9,6 @@ class ProfilePages extends StatefulWidget {
 
 class _ProfilePagesState extends State<ProfilePages> {
   final TextEditingController _controller = TextEditingController();
-  
 
   bool _isEmptyText = true;
 
@@ -18,12 +17,9 @@ class _ProfilePagesState extends State<ProfilePages> {
     return Scaffold(
       body: Center(
         child: Text(
-          "Hello gais",
+          "Profile Pages",
         ),
       ),
     );
   }
 }
-
-
- 
