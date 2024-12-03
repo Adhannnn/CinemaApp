@@ -29,7 +29,13 @@ class AllMovie {
         moviename: '13 Bom \ndi Jakarta',
         images: 'assets/images/13bomdijakarta.webp',
         rate: '4.0',
-        genre: 'Action\nAdventure'));
+        genre: 'Action'));
+
+    listing.add(AllMovie(
+        moviename: 'Minions',
+        images: 'assets/images/minionposter.jpg',
+        rate: '4.9',
+        genre: 'Animation'));
 
     return listing;
   }

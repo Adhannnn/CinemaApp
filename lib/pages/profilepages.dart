@@ -8,9 +8,7 @@ class ProfilePages extends StatefulWidget {
 }
 
 class _ProfilePagesState extends State<ProfilePages> {
-  final TextEditingController _controller = TextEditingController();
-
-  bool _isEmptyText = true;
+  
 
   @override
   Widget build(BuildContext context) {

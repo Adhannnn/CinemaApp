@@ -252,7 +252,7 @@ class _HomepagesState extends State<Homepages> {
     );
   }
 
-   // this is for the image slider
+  // this is for the image slider
   Widget _imageSlider() {
     return CarouselSlider.builder(
       itemCount: listmoviefirst.length,
@@ -538,7 +538,7 @@ class _HomepagesState extends State<Homepages> {
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.12),
-                    )
+                    ),
                   ],
                 ),
               ),
