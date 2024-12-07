@@ -1,7 +1,7 @@
-import 'package:cinema_application/widgets/custombackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:cinema_application/pages/accountflow/accountlogin.dart';
 import 'package:cinema_application/pages/accountflow/accountsignup.dart';
+import 'package:cinema_application/widgets/custombackbutton.dart';
 
 
 class Accountsetup extends StatelessWidget {

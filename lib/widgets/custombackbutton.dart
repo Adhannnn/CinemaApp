@@ -8,7 +8,7 @@ class CustomBackButton extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 253, 247),
         border: const Border(
@@ -26,6 +26,8 @@ class CustomBackButton extends StatelessWidget implements PreferredSizeWidget {
           
           // Back Button
           Container(
+            margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),
+            width: 36,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 196, 64),
               border: Border.all(
@@ -45,7 +47,7 @@ class CustomBackButton extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.pop(context);
               },
               icon: const Icon(
-                Icons.arrow_back_ios_new_outlined,
+                Icons.arrow_back_ios_new_rounded,
                 color: Color.fromARGB(255, 14, 37, 34),
                 size: 18,
               ),

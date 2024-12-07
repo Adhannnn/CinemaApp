@@ -10,6 +10,7 @@ import 'package:cinema_application/models/film.dart';
 
 import 'package:cinema_application/pages/searchfieldpages.dart';
 import 'package:cinema_application/pages/accountflow/accountsetup.dart';
+import 'package:cinema_application/widgets/homebarbutton.dart';
 
 class Homepages extends StatefulWidget {
   const Homepages({super.key});
@@ -35,7 +36,7 @@ class _HomepagesState extends State<Homepages> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5F0E0),
-      appBar: appBar(),
+      appBar: HomeBarButton(title: '',),
       body: homeeee(),
     );
   }
@@ -175,72 +176,6 @@ class _HomepagesState extends State<Homepages> {
       height: 37,
       width: 1,
       color: Colors.black,
-    );
-  }
-
-  // This is for the AppBar
-  AppBar appBar() {
-    return AppBar(
-      backgroundColor: Color(0xffF5F0E0),
-      elevation: 0.0,
-      leading: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-               Navigator.push(context, 
-                MaterialPageRoute(builder: (context) => Accountsetup()));
-            },
-            child: Container(
-                width: 40,
-                height: 40,
-                margin: EdgeInsets.all(10),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: const Color(0xffEDBD50),
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.5),
-                        blurRadius: 5,
-                        offset: const Offset(3, 3))
-                  ],
-                  border: Border.all(color: const Color(0xFF253C30), width: 3),
-                ),
-                child: SvgPicture.asset('assets/icon/search2.svg')),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context, 
-                MaterialPageRoute(builder: (context) => Searchfieldpages()));
-            },
-            child: Container(
-              width: 40,
-              height: 40,
-              margin: EdgeInsets.all(10),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
-                      blurRadius: 5,
-                      offset: const Offset(3, 3))
-                ],
-                border: Border.all(color: const Color(0xFF253C30)),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  'assets/images/siganteng.jpg',
-                  fit: BoxFit.cover,
-                  height: double.infinity,
-                  width: double.infinity,
-                ),
-              ),
-            ),
-          )
-        ],
-      )
     );
   }
 
