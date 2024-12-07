@@ -62,7 +62,26 @@ class _HomepagesState extends State<Homepages> {
             ),
           ),
         ),
+        moviesbutton()
       ],
+    );
+  }
+
+  Positioned moviesbutton() {
+    return Positioned(
+      bottom: 20,
+      right: 20,
+      child: SizedBox(
+        width: 70,
+        height: 43,
+        child: FloatingActionButton(
+          onPressed: () {
+            showallmovie(context);
+          },
+          backgroundColor: Colors.redAccent,
+          child: SvgPicture.asset('assets/icon/ticket.svg'),
+        ),
+      ),
     );
   }
 
@@ -117,7 +136,7 @@ class _HomepagesState extends State<Homepages> {
               fontSize: 12,
               letterSpacing: 0.12,
               color: Colors.black),
-        )
+        ),
       ],
     );
   }
@@ -273,10 +292,10 @@ class _HomepagesState extends State<Homepages> {
                 movie.nameMovie,
                 textAlign: TextAlign.end,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat-SemiBold'),
               ),
             )
           ],
@@ -334,9 +353,7 @@ class _HomepagesState extends State<Homepages> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: () {
-                    showallmovie(context);
-                  },
+                  onTap: () {},
                   child: Text(
                     "See All",
                     style: TextStyle(
@@ -401,11 +418,11 @@ class _HomepagesState extends State<Homepages> {
                             child: Text(
                               "Choose a Movie",
                               style: TextStyle(
-                                fontFamily: "Montserrat-SemiBold",
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
+                                  fontFamily: "Montserrat-SemiBold",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  decorationThickness: 0),
                             ),
                           ),
                           Padding(
@@ -422,26 +439,46 @@ class _HomepagesState extends State<Homepages> {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
-                                  crossAxisSpacing: 8,
-                                  mainAxisSpacing: 3),
+                                  crossAxisSpacing: 15,
+                                  mainAxisSpacing: 12,
+                                  childAspectRatio: 0.7),
                           itemCount: showMovie.length,
                           itemBuilder: (context, index) {
                             var movie = showMovie[index];
                             return Column(
                               children: [
-                                SizedBox(
-                                    height: 130,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(6),
-                                      child: Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                          image: AssetImage(movie.pathImage),
-                                          fit: BoxFit.cover,
-                                        )),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(6),
+                                  child: AspectRatio(
+                                    aspectRatio: 0.7,
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 180,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        image: AssetImage(movie.pathImage),
+                                        fit: BoxFit.cover,
+                                      )),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.only(top: 4),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      movie.title,
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
                                       ),
-                                    ))
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                )
                               ],
                             );
                           },
@@ -478,7 +515,7 @@ class _HomepagesState extends State<Homepages> {
                 Image.asset(
                   movie.images,
                   fit: BoxFit.cover,
-                  height: 300,
+                  height: 320,
                   width: double.infinity,
                 ),
                 // Movie Title and Genre
@@ -490,14 +527,17 @@ class _HomepagesState extends State<Homepages> {
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          movie.moviename,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Montserrat-Bold",
-                              letterSpacing: 0.12),
+                        Flexible(
+                          child: Text(
+                            movie.moviename,
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Montserrat-Bold",
+                                letterSpacing: 0.12),
+                          ),
                         ),
                         SizedBox(height: 4),
                         Text(

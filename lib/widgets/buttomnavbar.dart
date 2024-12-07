@@ -17,6 +17,7 @@ class _ButtomnavbarState extends State<Buttomnavbar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       backgroundColor: Color(0xffF5F0E0),
+      
       currentIndex: _selectedIndex,
       onTap: (index) {
         widget.onItemTap(index);

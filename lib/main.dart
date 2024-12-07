@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(
           fontFamily: 'Montserrat',
           splashColor: Colors.transparent,
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePages extends StatefulWidget {
-  MyHomePages({super.key});
+  const MyHomePages({super.key});
 
   @override
   State<MyHomePages> createState() => _MyHomePagesState();
