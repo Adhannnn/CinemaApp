@@ -1,12 +1,15 @@
 import 'dart:ui';
 
-import 'package:cinema_application/models/listallmovie.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:cinema_application/models/listallmovie.dart';
 import 'package:cinema_application/models/listmovie.dart';
 import 'package:cinema_application/models/film.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:cinema_application/pages/searchfieldpages.dart';
+import 'package:cinema_application/pages/accountflow/accountsetup.dart';
 
 class Homepages extends StatefulWidget {
   const Homepages({super.key});
@@ -62,26 +65,7 @@ class _HomepagesState extends State<Homepages> {
             ),
           ),
         ),
-        moviesbutton()
       ],
-    );
-  }
-
-  Positioned moviesbutton() {
-    return Positioned(
-      bottom: 20,
-      right: 20,
-      child: SizedBox(
-        width: 70,
-        height: 43,
-        child: FloatingActionButton(
-          onPressed: () {
-            showallmovie(context);
-          },
-          backgroundColor: Colors.redAccent,
-          child: SvgPicture.asset('assets/icon/ticket.svg'),
-        ),
-      ),
     );
   }
 
@@ -136,7 +120,7 @@ class _HomepagesState extends State<Homepages> {
               fontSize: 12,
               letterSpacing: 0.12,
               color: Colors.black),
-        ),
+        )
       ],
     );
   }
@@ -197,62 +181,66 @@ class _HomepagesState extends State<Homepages> {
   // This is for the AppBar
   AppBar appBar() {
     return AppBar(
-      centerTitle: true,
       backgroundColor: Color(0xffF5F0E0),
       elevation: 0.0,
-      leading: GestureDetector(
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Searchfieldpages()));
-        },
-        child: Container(
-            width: 40,
-            height: 40,
-            margin: EdgeInsets.all(10),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: const Color(0xffEDBD50),
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    blurRadius: 5,
-                    offset: const Offset(3, 3))
-              ],
-              border: Border.all(color: const Color(0xFF253C30), width: 3),
-            ),
-            child: SvgPicture.asset('assets/icon/search2.svg')),
-      ),
-      actions: [
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            width: 40,
-            height: 40,
-            margin: EdgeInsets.all(10),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    blurRadius: 5,
-                    offset: const Offset(3, 3))
-              ],
-              border: Border.all(color: const Color(0xFF253C30)),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                'assets/images/siganteng.jpg',
-                fit: BoxFit.cover,
-                height: double.infinity,
-                width: double.infinity,
+      leading: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+               Navigator.push(context, 
+                MaterialPageRoute(builder: (context) => Accountsetup()));
+            },
+            child: Container(
+                width: 40,
+                height: 40,
+                margin: EdgeInsets.all(10),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: const Color(0xffEDBD50),
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        blurRadius: 5,
+                        offset: const Offset(3, 3))
+                  ],
+                  border: Border.all(color: const Color(0xFF253C30), width: 3),
+                ),
+                child: SvgPicture.asset('assets/icon/search2.svg')),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, 
+                MaterialPageRoute(builder: (context) => Searchfieldpages()));
+            },
+            child: Container(
+              width: 40,
+              height: 40,
+              margin: EdgeInsets.all(10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      blurRadius: 5,
+                      offset: const Offset(3, 3))
+                ],
+                border: Border.all(color: const Color(0xFF253C30)),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  'assets/images/siganteng.jpg',
+                  fit: BoxFit.cover,
+                  height: double.infinity,
+                  width: double.infinity,
+                ),
               ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      )
     );
   }
 
@@ -292,10 +280,10 @@ class _HomepagesState extends State<Homepages> {
                 movie.nameMovie,
                 textAlign: TextAlign.end,
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat-SemiBold'),
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           ],
@@ -353,7 +341,9 @@ class _HomepagesState extends State<Homepages> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    showallmovie(context);
+                  },
                   child: Text(
                     "See All",
                     style: TextStyle(
@@ -418,11 +408,11 @@ class _HomepagesState extends State<Homepages> {
                             child: Text(
                               "Choose a Movie",
                               style: TextStyle(
-                                  fontFamily: "Montserrat-SemiBold",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  decorationThickness: 0),
+                                fontFamily: "Montserrat-SemiBold",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                           Padding(
@@ -439,46 +429,26 @@ class _HomepagesState extends State<Homepages> {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
-                                  crossAxisSpacing: 15,
-                                  mainAxisSpacing: 12,
-                                  childAspectRatio: 0.7),
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 3),
                           itemCount: showMovie.length,
                           itemBuilder: (context, index) {
                             var movie = showMovie[index];
                             return Column(
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(6),
-                                  child: AspectRatio(
-                                    aspectRatio: 0.7,
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 180,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        image: AssetImage(movie.pathImage),
-                                        fit: BoxFit.cover,
-                                      )),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets.only(top: 4),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      movie.title,
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat-SemiBold',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
+                                SizedBox(
+                                    height: 130,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(6),
+                                      child: Container(
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          image: AssetImage(movie.pathImage),
+                                          fit: BoxFit.cover,
+                                        )),
                                       ),
-                                      textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                    ),
-                                  ),
-                                )
+                                    ))
                               ],
                             );
                           },
@@ -515,7 +485,7 @@ class _HomepagesState extends State<Homepages> {
                 Image.asset(
                   movie.images,
                   fit: BoxFit.cover,
-                  height: 320,
+                  height: 300,
                   width: double.infinity,
                 ),
                 // Movie Title and Genre
@@ -527,17 +497,14 @@ class _HomepagesState extends State<Homepages> {
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Flexible(
-                          child: Text(
-                            movie.moviename,
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Montserrat-Bold",
-                                letterSpacing: 0.12),
-                          ),
+                        Text(
+                          movie.moviename,
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Montserrat-Bold",
+                              letterSpacing: 0.12),
                         ),
                         SizedBox(height: 4),
                         Text(

@@ -13,12 +13,6 @@ class Listallmovie {
 
     addMovie.add(Listallmovie(
         pathImage: 'assets/images/agaklaen.jpg', title: "Agak Laen"));
-
-    addMovie.add(Listallmovie(
-        pathImage: 'assets/images/minionsposter.jpg', title: 'Minions'));
-
-    addMovie.add(Listallmovie(
-        pathImage: 'assets/images/aadc2poster.jpg', title: 'AADC 2'));
     return addMovie;
   }
 }

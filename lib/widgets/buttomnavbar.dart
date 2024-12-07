@@ -15,36 +15,47 @@ class _ButtomnavbarState extends State<Buttomnavbar> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: Color(0xffF5F0E0),
-      
-      currentIndex: _selectedIndex,
-      onTap: (index) {
-        widget.onItemTap(index);
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
-      type: BottomNavigationBarType.fixed,
-      items: [
-        BottomNavigationBarItem(
-            icon: buildNavIcon('assets/icon/home.svg', 0), label: ''),
-        BottomNavigationBarItem(
-            icon: buildNavIcon('assets/icon/ticket.svg', 1), label: ''),
-        BottomNavigationBarItem(
-            icon: buildNavIcon('assets/icon/favorite.svg', 2), label: ''),
-        BottomNavigationBarItem(
-            icon: buildNavIcon('assets/icon/transaction.svg', 3), label: ''),
-        BottomNavigationBarItem(
-            icon: buildNavIcon('assets/icon/profile.svg', 4), label: '')
-      ],
+    return Container(
+      color: Color(0xffF5F0E0), // Background color of the container
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Add padding
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          splashFactory: NoSplash.splashFactory, // Remove ripple effect
+          highlightColor: const Color.fromARGB(0, 194, 113, 113), // Disable highlight on hover
+        ),
+        child: BottomNavigationBar(
+          elevation: 0, // Remove the shadow
+          backgroundColor: Colors.transparent, // Keep it transparent to use container color
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            widget.onItemTap(index);
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+                icon: buildNavIcon('assets/icon/home.svg', 0), label: ''),
+            BottomNavigationBarItem(
+                icon: buildNavIcon('assets/icon/ticket.svg', 1), label: ''),
+            BottomNavigationBarItem(
+                icon: buildNavIcon('assets/icon/favorite.svg', 2), label: ''),
+            BottomNavigationBarItem(
+                icon: buildNavIcon('assets/icon/transaction.svg', 3), label: ''),
+            BottomNavigationBarItem(
+                icon: buildNavIcon('assets/icon/profile.svg', 4), label: '')
+          ],
+        ),
+      ),
     );
   }
 
   Widget buildNavIcon(String path, int index) {
     return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.symmetric(horizontal: 6),
+      width: 42,
+      height: 42,
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
           color:
               _selectedIndex == index ? Color(0xffFFFDF7) : Colors.transparent,
@@ -52,8 +63,8 @@ class _ButtomnavbarState extends State<Buttomnavbar> {
       child: Center(
         child: SvgPicture.asset(
           path,
-          width: 19,
-          height: 19,
+          // width: 19,
+          // height: 19,
           colorFilter: _selectedIndex == index
               ? ColorFilter.mode(Color(0xffDC555E), BlendMode.srcIn)
               : null,

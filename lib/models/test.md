@@ -1,1 +1,0 @@
-Halo gais nama saya adhan

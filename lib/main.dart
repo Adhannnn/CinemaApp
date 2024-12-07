@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:cinema_application/widgets/buttomnavbar.dart';
+
 import 'package:cinema_application/pages/favoritepages.dart';
 import 'package:cinema_application/pages/homepages.dart';
 import 'package:cinema_application/pages/ownticketpages.dart';
 import 'package:cinema_application/pages/profilepages.dart';
 import 'package:cinema_application/pages/transactionpages.dart';
-import 'package:cinema_application/widgets/buttomnavbar.dart';
-import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: 'Montserrat',
           splashColor: Colors.transparent,
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePages extends StatefulWidget {
-  const MyHomePages({super.key});
+  MyHomePages({super.key});
 
   @override
   State<MyHomePages> createState() => _MyHomePagesState();
@@ -41,7 +42,7 @@ class _MyHomePagesState extends State<MyHomePages> {
     OwnTicketPages(),
     Favoritepages(),
     Transactionpages(),
-    ProfilePages()
+    ProfilePages(),
   ];
 
   int _selectedIndex = 0;
