@@ -1,3 +1,4 @@
+import 'package:cinema_application/pages/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cinema_application/widgets/buttomnavbar.dart';
 
@@ -24,45 +25,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Montserrat',
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent),
-      home: MyHomePages(),
-    );
-  }
-}
-
-class MyHomePages extends StatefulWidget {
-  MyHomePages({super.key});
-
-  @override
-  State<MyHomePages> createState() => _MyHomePagesState();
-}
-
-class _MyHomePagesState extends State<MyHomePages> {
-  final List<Widget> _pages = [
-    Homepages(),
-    OwnTicketPages(),
-    Favoritepages(),
-    Transactionpages(),
-    ProfilePages(),
-  ];
-
-  int _selectedIndex = 0;
-
-  void _onItemTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _pages,
-      ),
-      bottomNavigationBar: Buttomnavbar(
-        onItemTap: _onItemTap,
-      ),
+      home: HomeScreen(),
     );
   }
 }
