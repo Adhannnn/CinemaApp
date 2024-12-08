@@ -15,37 +15,44 @@ class _ButtomnavbarState extends State<Buttomnavbar> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xffF5F0E0), // Background color of the container
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Add padding
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          splashFactory: NoSplash.splashFactory, // Remove ripple effect
-          highlightColor: const Color.fromARGB(0, 194, 113, 113), // Disable highlight on hover
-        ),
-        child: BottomNavigationBar(
-          elevation: 0, // Remove the shadow
-          backgroundColor: Colors.transparent, // Keep it transparent to use container color
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            widget.onItemTap(index);
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-                icon: buildNavIcon('assets/icon/home.svg', 0), label: ''),
-            BottomNavigationBarItem(
-                icon: buildNavIcon('assets/icon/ticket.svg', 1), label: ''),
-            BottomNavigationBarItem(
-                icon: buildNavIcon('assets/icon/favorite.svg', 2), label: ''),
-            BottomNavigationBarItem(
-                icon: buildNavIcon('assets/icon/transaction.svg', 3), label: ''),
-            BottomNavigationBarItem(
-                icon: buildNavIcon('assets/icon/profile.svg', 4), label: '')
-          ],
+    return SizedBox(
+      height: 80,
+      child: Container(
+        color: Color(0xffF5F0E0), // Background color of the container
+        padding: EdgeInsets.symmetric(horizontal: 25), // Add padding
+
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            splashFactory: NoSplash.splashFactory, // Remove ripple effect
+            highlightColor: const Color.fromARGB(
+                0, 194, 113, 113), // Disable highlight on hover
+          ),
+          child: BottomNavigationBar(
+            elevation: 0, // Remove the shadow
+            backgroundColor: Colors
+                .transparent, // Keep it transparent to use container color
+            currentIndex: _selectedIndex,
+            onTap: (index) {
+              widget.onItemTap(index);
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                  icon: buildNavIcon('assets/icon/home.svg', 0), label: ''),
+              BottomNavigationBarItem(
+                  icon: buildNavIcon('assets/icon/ticket.svg', 1), label: ''),
+              BottomNavigationBarItem(
+                  icon: buildNavIcon('assets/icon/favorite.svg', 2), label: ''),
+              BottomNavigationBarItem(
+                  icon: buildNavIcon('assets/icon/transaction.svg', 3),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: buildNavIcon('assets/icon/profile.svg', 4), label: '')
+            ],
+          ),
         ),
       ),
     );

@@ -8,6 +8,7 @@ class CustomBackButton extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 65, // Adding height for AppBar.
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 253, 247),
@@ -18,12 +19,9 @@ class CustomBackButton extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      child: 
-      
-      Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          
           // Back Button
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),

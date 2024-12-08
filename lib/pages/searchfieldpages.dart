@@ -36,7 +36,7 @@ class _SearhfieldpagesState extends State<Searchfieldpages> {
 
   Widget _searchField() {
     return Container(
-      margin: const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 20),
+      margin: const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -69,7 +69,14 @@ class _SearhfieldpagesState extends State<Searchfieldpages> {
                             height: 15,
                           ),
                         )
-                      : null,
+                      : Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: GestureDetector(
+                            onTap: () {
+                              _controller.clear();
+                            },
+                            child: Icon(Icons.cancel),
+                          )),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(

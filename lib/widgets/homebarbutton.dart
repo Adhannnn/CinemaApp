@@ -46,6 +46,7 @@ class HomeBarButton extends StatelessWidget implements PreferredSizeWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),
                   width: 36,
+                  height: 40, // Adding for the height of the button Container (Adhan).
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 196, 64),
                     border: Border.all(
@@ -77,6 +78,7 @@ class HomeBarButton extends StatelessWidget implements PreferredSizeWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),
                   width: 36,
+                  height: 40,  // Adding for the height of the button Container (Adhan).
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     border: Border.all(
