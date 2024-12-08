@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool showBottomBorder;
+  final Widget? trailingButton;
 
-  CustomBackButton({required this.title});
+  CustomBackButton({
+    required this.title,
+    this.showBottomBorder = true,
+    this.trailingButton,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +18,14 @@ class CustomBackButton extends StatelessWidget implements PreferredSizeWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 253, 247),
-        border: const Border(
-          bottom: BorderSide(
-            color: Color.fromARGB(255, 14, 37, 34),
-            width: 1.2,
-          ),
-        ),
+        border: showBottomBorder
+            ? const Border(
+                bottom: BorderSide(
+                  color: Color.fromARGB(255, 14, 37, 34),
+                  width: 1.2,
+                ),
+              )
+            : null,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,8 +74,11 @@ class CustomBackButton extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
 
-          // Placeholder for symmetry (could add a trailing button here if needed)
-          const SizedBox(width: 48), // Ensures symmetry in alignment
+          // optional trailing button
+          trailingButton ?? // this is cool, idk why
+              const SizedBox(
+                width: 48,
+              ),
         ],
       ),
     );

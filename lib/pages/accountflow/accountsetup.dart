@@ -98,8 +98,7 @@ class Accountsetup extends StatelessWidget {
                               width: 1.2,
                             ),
                           ),
-                          elevation:
-                              0, // Set elevation ke 0 untuk menghindari shadow default
+                          elevation: 0, // Set elevation ke 0 untuk menghindari shadow default
                         ),
                         child: const Text(
                           'Sign in',

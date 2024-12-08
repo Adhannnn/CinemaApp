@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 // Package
+import 'package:cinema_application/pages/flowhomeactivities/exploremovies.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -70,6 +71,7 @@ class _HomepagesState extends State<Homepages> {
           ),
         ),
         
+        // Explore Movies Button
         Positioned(
           bottom: 20,
           right: 20,
@@ -92,7 +94,7 @@ class _HomepagesState extends State<Homepages> {
             ),
             child: FloatingActionButton(
               onPressed: () {
-                showallmovie(context);
+                nowShowingMovies(context);
               },
               backgroundColor: Colors.transparent,
               elevation: 0, //remove shadow
@@ -306,9 +308,10 @@ class _HomepagesState extends State<Homepages> {
                 child: Text(
                   "Explore Movies",
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Montserrat-Bold",
+                    fontSize: 17,
+                    color: Color.fromARGB(255, 14, 37, 34), //blak
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "Montserrat",
                   ),
                 ),
               ),
@@ -316,14 +319,18 @@ class _HomepagesState extends State<Homepages> {
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    showallmovie(context);
+                    Navigator.push(context, 
+                        MaterialPageRoute(builder: (context) => ExploreMovies()));
                   },
                   child: Text(
                     "See All",
                     style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: "Montserrat-SemiBold",
-                        color: Colors.white),
+                      // decoration: TextDecoration.underline,
+                      // decorationColor: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Montserrat",
+                      color: Colors.white),
                   ),
                 ),
               ),
@@ -345,8 +352,8 @@ class _HomepagesState extends State<Homepages> {
     );
   }
 
-  // show the movie in the See All Container
-  void showallmovie(BuildContext context) {
+  // show all showing movie
+  void nowShowingMovies(BuildContext context) {
     showGeneralDialog(
       context: context,
       barrierDismissible: true,

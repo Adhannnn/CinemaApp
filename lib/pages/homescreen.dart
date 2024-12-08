@@ -4,7 +4,7 @@ import 'package:cinema_application/pages/ownticketpages.dart';
 import 'package:cinema_application/pages/profilepages.dart';
 import 'package:cinema_application/pages/transactionpages.dart';
 import 'package:cinema_application/widgets/buttomnavbar.dart';
-import 'package:cinema_application/widgets/homebarbutton.dart';
+// import 'package:cinema_application/widgets/homebarbutton.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
