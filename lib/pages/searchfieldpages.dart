@@ -170,15 +170,18 @@ class _SearhfieldpagesState extends State<Searchfieldpages> {
                       width: 16,
                     ),
                     const SizedBox(width: 6),
-                    Text(
-                      movie.genre,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54,
+                    Expanded(
+                      child: Text(
+                        movie.genre,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const SizedBox(width: 85),
+                    const Spacer(),
                     Container(
                       padding:
                           EdgeInsets.symmetric(vertical: 5, horizontal: 10),

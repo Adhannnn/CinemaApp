@@ -26,7 +26,7 @@ class AllMovie {
         rating: 'PG-13'));
 
     listing.add(AllMovie(
-        moviename: 'Agak Laen',
+        moviename: 'Spiderman : \nNo Way Home',
         images: 'assets/images/spidermanposter.jpg',
         rate: '4.0',
         genre: 'Action',
