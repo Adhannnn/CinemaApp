@@ -245,7 +245,7 @@ class Accountsignup extends StatelessWidget {
                                       0, // Set elevation ke 0 untuk menghindari shadow default
                                 ),
                                 child: const Text(
-                                  'Sign in',
+                                  'Sign up',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700),

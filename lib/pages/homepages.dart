@@ -292,10 +292,10 @@ class _HomepagesState extends State<Homepages> {
   // Movie List
   Container listMovie() {
     return Container(
-      height: 500,
+      height: 412,
       width: 450,
       color: Color(0xffA7D4CB),
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.fromLTRB(12, 7, 12, 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -476,14 +476,14 @@ class _HomepagesState extends State<Homepages> {
   // Movie Card Widget
   Widget movieCard(AllMovie movie) {
     return Container(
-      width: 250,
+      width: 200,
       margin: EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
         boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.0))],
       ),
+
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         clipBehavior: Clip.antiAlias,
         child: Stack(
           alignment: Alignment.topRight,
@@ -491,37 +491,43 @@ class _HomepagesState extends State<Homepages> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 // Movie Poster
                 Image.asset(
                   movie.images,
                   fit: BoxFit.cover,
-                  height: 300,
+                  height: 220,
                   width: double.infinity,
                 ),
+
                 // Movie Title and Genre
                 Expanded(
                   child: Container(
-                    color: Colors.amberAccent,
+                    color: Color.fromARGB(255, 255, 196, 64),
                     padding: EdgeInsets.all(12),
-                    height: 180,
+                    height: 60,
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          movie.moviename,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Montserrat-Bold",
-                              letterSpacing: 0.12),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 8, 0, 5),
+                          child: Text(
+                            movie.moviename,
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "Montserrat",
+                                letterSpacing: 0.12),
+                          ),
                         ),
                         SizedBox(height: 4),
                         Text(
                           movie.genre,
                           style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black45,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromARGB(255, 14, 37, 34),
                           ),
                         ),
                       ],
@@ -536,13 +542,13 @@ class _HomepagesState extends State<Homepages> {
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 decoration: BoxDecoration(
-                    color: Colors.redAccent,
+                    color: Color.fromARGB(255, 220, 85, 94),
                     borderRadius: BorderRadius.circular(8)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      Icons.star,
+                      Icons.star_border_rounded,
                       color: Colors.white,
                       size: 16,
                     ),
