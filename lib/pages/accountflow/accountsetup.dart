@@ -126,10 +126,7 @@ class Accountsetup extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Accountsignup()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Accountsignup()));
                   },
                   child: Text(
                     " Register here",
