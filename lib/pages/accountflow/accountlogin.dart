@@ -1,6 +1,6 @@
 import 'package:cinema_application/pages/homescreen.dart';
 import 'package:flutter/material.dart';
-import 'package:cinema_application/pages/homepages.dart';
+// import 'package:cinema_application/pages/homepages.dart';
 import 'package:cinema_application/widgets/custombackbutton.dart';
 
 class Accountlogin extends StatelessWidget {

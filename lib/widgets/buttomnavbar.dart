@@ -61,7 +61,7 @@ class _ButtomnavbarState extends State<Buttomnavbar> {
             width: 22,
             height: 22,
             colorFilter: _selectedIndex == index
-                ? const ColorFilter.mode(Color(0xffDC555E), BlendMode.srcIn)
+                ? const ColorFilter.mode(Color.fromARGB(255, 220, 85, 94), BlendMode.srcIn)
                 : null,
           ),
         ),
