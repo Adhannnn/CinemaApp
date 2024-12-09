@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 // Package
+import 'package:cinema_application/pages/detailmoviepages.dart';
 import 'package:cinema_application/pages/flowhomeactivities/exploremovies.dart';
 import 'package:cinema_application/pages/flowhomeactivities/moviedetails.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,7 @@ class _HomepagesState extends State<Homepages> {
             ),
           ),
         ),
-        
+
         // Explore Movies Button
         Positioned(
           bottom: 20,
@@ -102,9 +103,9 @@ class _HomepagesState extends State<Homepages> {
               highlightElevation: 0, // remove shadow on press
               hoverElevation: 0, // remove shadow when hovering
               disabledElevation: 0, // remove shadow when disabled
-              child: 
-              // Icon(Icons.confirmation_num_outlined)
-                SvgPicture.asset('assets/icon/ticket.svg'),
+              child:
+                  // Icon(Icons.confirmation_num_outlined)
+                  SvgPicture.asset('assets/icon/ticket.svg'),
             ),
           ),
         )
@@ -320,18 +321,20 @@ class _HomepagesState extends State<Homepages> {
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(context, 
-                        MaterialPageRoute(builder: (context) => ExploreMovies()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ExploreMovies()));
                   },
                   child: Text(
                     "See All",
                     style: TextStyle(
-                      // decoration: TextDecoration.underline,
-                      // decorationColor: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Montserrat",
-                      color: Colors.white),
+                        // decoration: TextDecoration.underline,
+                        // decorationColor: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Montserrat",
+                        color: Colors.white),
                   ),
                 ),
               ),
@@ -344,7 +347,25 @@ class _HomepagesState extends State<Homepages> {
               scrollDirection: Axis.horizontal,
               itemCount: allmovie.length,
               itemBuilder: (context, index) {
-                return movieCard(allmovie[index]);
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Moviedetail(
+                          movieTitle: allmovie[index].moviename,
+                          movieDescription: allmovie[index].synopsis,
+                          movieImage: allmovie[index].images,
+                          movieRating: allmovie[index].rating,
+                          movieYears: allmovie[index].years,
+                          movieDuration: allmovie[index].time,
+                          movieGenre: allmovie[index].genre,
+                        ),
+                      ),
+                    );
+                  },
+                  child: movieCard(allmovie[index]),
+                );
               },
             ),
           ),
@@ -363,7 +384,6 @@ class _HomepagesState extends State<Homepages> {
       pageBuilder: (context, anim1, anim2) {
         return Stack(
           children: [
-
             // Static blur background
             Positioned.fill(
               child: BackdropFilter(
@@ -387,7 +407,6 @@ class _HomepagesState extends State<Homepages> {
                   parent: anim1,
                   curve: Curves.easeOut, // Smooth animation curve
                 )),
-
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.9,
                   width: MediaQuery.of(context).size.width * 0.95,
@@ -403,11 +422,9 @@ class _HomepagesState extends State<Homepages> {
                       topRight: Radius.circular(8),
                     ),
                   ),
-
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       // The Bar
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -439,11 +456,13 @@ class _HomepagesState extends State<Homepages> {
                       SizedBox(height: 8),
                       Expanded(
                         child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             crossAxisSpacing: 8,
                             mainAxisSpacing: 8,
-                            childAspectRatio: 0.7, // Set a consistent aspect ratio
+                            childAspectRatio:
+                                0.7, // Set a consistent aspect ratio
                           ),
                           itemCount: showMovie.length,
                           itemBuilder: (context, index) {
@@ -465,7 +484,8 @@ class _HomepagesState extends State<Homepages> {
 
                       //apus ini kalau udah selesai
                       Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 13.5),
                         width: 36,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 255, 196, 64),
@@ -483,7 +503,10 @@ class _HomepagesState extends State<Homepages> {
                         ),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Moviedetails()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Moviedetails()));
                           },
                           child: Text(
                             "Movie Details Test",
@@ -506,49 +529,48 @@ class _HomepagesState extends State<Homepages> {
         );
       },
     );
-
   }
 
   // Movie Card Widget
   Widget movieCard(AllMovie movie) {
     return Container(
-      width: 200,
-      margin: EdgeInsets.only(right: 10, bottom: 10),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: const Color.fromARGB(255, 14, 37, 34),
-            width: 1.2,
-          ),
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(1, 2),
-              color: Colors.black.withOpacity(1),
+        width: 200,
+        margin: EdgeInsets.only(right: 10, bottom: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 14, 37, 34),
+              width: 1.2,
             ),
-          ],
-        ),
-        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        // clipBehavior: Clip.antiAlias,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(1, 2),
+                color: Colors.black.withOpacity(1),
+              ),
+            ],
+          ),
+          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          // clipBehavior: Clip.antiAlias,
           child: Stack(
             alignment: Alignment.topRight,
             children: [
               Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8), // Adjust the radius value as needed
-                        topRight: Radius.circular(8),
-                      ),
-                      child: Image.asset(
-                        movie.images,
-                        fit: BoxFit.cover,
-                        height: 220,
-                        width: double.infinity,
-                      ),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                          8), // Adjust the radius value as needed
+                      topRight: Radius.circular(8),
                     ),
+                    child: Image.asset(
+                      movie.images,
+                      fit: BoxFit.cover,
+                      height: 220,
+                      width: double.infinity,
+                    ),
+                  ),
 
                   // Movie Title and Genre
                   Expanded(
@@ -556,9 +578,8 @@ class _HomepagesState extends State<Homepages> {
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 255, 196, 64),
                         borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8)
-                        ),
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8)),
                         boxShadow: [
                           BoxShadow(
                             offset: const Offset(1, 2),
@@ -631,7 +652,7 @@ class _HomepagesState extends State<Homepages> {
             ],
           ),
         )
-      // ),
-    );
+        // ),
+        );
   }
 }
