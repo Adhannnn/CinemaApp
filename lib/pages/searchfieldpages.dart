@@ -186,16 +186,12 @@ class _SearhfieldpagesState extends State<Searchfieldpages> {
                       padding:
                           EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                       decoration: BoxDecoration(
-                          color: Colors.redAccent,
+                          color: Color(0xffDC555E),
                           borderRadius: BorderRadius.circular(8)),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.white,
-                            size: 16,
-                          ),
+                          SvgPicture.asset('assets/icon/star.svg'),
                           SizedBox(width: 4),
                           Text(
                             movie.rate,
