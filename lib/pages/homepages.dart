@@ -71,7 +71,7 @@ class _HomepagesState extends State<Homepages> {
             ),
           ),
         ),
-        
+
         // Explore Movies Button
         Positioned(
           bottom: 20,
@@ -102,9 +102,9 @@ class _HomepagesState extends State<Homepages> {
               highlightElevation: 0, // remove shadow on press
               hoverElevation: 0, // remove shadow when hovering
               disabledElevation: 0, // remove shadow when disabled
-              child: 
-              // Icon(Icons.confirmation_num_outlined)
-                SvgPicture.asset('assets/icon/ticket.svg'),
+              child:
+                  // Icon(Icons.confirmation_num_outlined)
+                  SvgPicture.asset('assets/icon/ticket.svg'),
             ),
           ),
         )
@@ -320,18 +320,20 @@ class _HomepagesState extends State<Homepages> {
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(context, 
-                        MaterialPageRoute(builder: (context) => ExploreMovies()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ExploreMovies()));
                   },
                   child: Text(
                     "See All",
                     style: TextStyle(
-                      // decoration: TextDecoration.underline,
-                      // decorationColor: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Montserrat",
-                      color: Colors.white),
+                        // decoration: TextDecoration.underline,
+                        // decorationColor: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Montserrat",
+                        color: Colors.white),
                   ),
                 ),
               ),
@@ -363,7 +365,6 @@ class _HomepagesState extends State<Homepages> {
       pageBuilder: (context, anim1, anim2) {
         return Stack(
           children: [
-
             // Static blur background
             Positioned.fill(
               child: BackdropFilter(
@@ -387,7 +388,6 @@ class _HomepagesState extends State<Homepages> {
                   parent: anim1,
                   curve: Curves.easeOut, // Smooth animation curve
                 )),
-
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.9,
                   width: MediaQuery.of(context).size.width * 0.95,
@@ -403,11 +403,9 @@ class _HomepagesState extends State<Homepages> {
                       topRight: Radius.circular(8),
                     ),
                   ),
-
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       // The Bar
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -439,11 +437,13 @@ class _HomepagesState extends State<Homepages> {
                       SizedBox(height: 8),
                       Expanded(
                         child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             crossAxisSpacing: 8,
                             mainAxisSpacing: 8,
-                            childAspectRatio: 0.7, // Set a consistent aspect ratio
+                            childAspectRatio:
+                                0.7, // Set a consistent aspect ratio
                           ),
                           itemCount: showMovie.length,
                           itemBuilder: (context, index) {
@@ -465,7 +465,8 @@ class _HomepagesState extends State<Homepages> {
 
                       //apus ini kalau udah selesai
                       Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 13.5),
                         width: 36,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 255, 196, 64),
@@ -484,9 +485,9 @@ class _HomepagesState extends State<Homepages> {
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Moviedetails())
-                            );
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Moviedetails()));
                           },
                           child: Text(
                             "Movie Details Test",
@@ -509,7 +510,6 @@ class _HomepagesState extends State<Homepages> {
         );
       },
     );
-
   }
 
   // Movie Card Widget
@@ -520,7 +520,6 @@ class _HomepagesState extends State<Homepages> {
       decoration: BoxDecoration(
         boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.0))],
       ),
-
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         clipBehavior: Clip.antiAlias,
@@ -530,7 +529,6 @@ class _HomepagesState extends State<Homepages> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 // Movie Poster
                 Image.asset(
                   movie.images,
@@ -586,11 +584,7 @@ class _HomepagesState extends State<Homepages> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      Icons.star_border_rounded,
-                      color: Colors.white,
-                      size: 16,
-                    ),
+                    SvgPicture.asset('assets/icon/star.svg'),
                     SizedBox(width: 4),
                     Text(
                       movie.rate,
