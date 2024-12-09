@@ -190,69 +190,6 @@ class Moviedetail extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             // Schedule Section
-            Container(
-              color: Colors.grey[200],
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Show",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: List.generate(7, (index) {
-                        return Column(
-                          children: [
-                            Text("Mon"),
-                            SizedBox(height: 8),
-                            Text("26",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        );
-                      }),
-                    ),
-                    SizedBox(height: 16),
-                    // Cinema and Schedule Blocks
-                    Column(
-                      children: [
-                        Text(
-                          "Icon Aeon Mall JGC",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: List.generate(4, (index) {
-                            return Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.amber,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Column(
-                                children: [
-                                  Text("16:20 - 18:28"),
-                                  SizedBox(height: 4),
-                                  Text("178/178 Seat"),
-                                ],
-                              ),
-                            );
-                          }),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
           ],
         ),
       ),
