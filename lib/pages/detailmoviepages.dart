@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Moviedetail extends StatelessWidget {
+class Moviedetail extends StatefulWidget {
   final String movieTitle;
   final String movieDescription;
   final String movieImage;
@@ -21,6 +21,13 @@ class Moviedetail extends StatelessWidget {
       required this.movieGenre});
 
   @override
+  State<Moviedetail> createState() => _MoviedetailState();
+}
+
+class _MoviedetailState extends State<Moviedetail> {
+  bool isExpanded = false;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -36,8 +43,8 @@ class Moviedetail extends StatelessWidget {
                   height: 250,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image:
-                          AssetImage(movieImage), // Use NetworkImage for URLs
+                      image: AssetImage(
+                          widget.movieImage), // Use NetworkImage for URLs
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -93,7 +100,7 @@ class Moviedetail extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           image: DecorationImage(
-                            image: AssetImage(movieImage),
+                            image: AssetImage(widget.movieImage),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -105,7 +112,7 @@ class Moviedetail extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              movieTitle,
+                              widget.movieTitle,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -119,7 +126,7 @@ class Moviedetail extends StatelessWidget {
                                 SizedBox(
                                   width: 4,
                                 ),
-                                Text(movieYears),
+                                Text(widget.movieYears),
                                 SizedBox(
                                   width: 5,
                                 ),
@@ -131,7 +138,7 @@ class Moviedetail extends StatelessWidget {
                                 SizedBox(
                                   width: 4,
                                 ),
-                                Text(movieDuration),
+                                Text(widget.movieDuration),
                                 SizedBox(
                                   width: 5,
                                 ),
@@ -143,7 +150,7 @@ class Moviedetail extends StatelessWidget {
                                 SizedBox(
                                   width: 4,
                                 ),
-                                Text(movieGenre),
+                                Text(widget.movieGenre),
                               ],
                             ),
                             SizedBox(height: 16),
@@ -152,7 +159,7 @@ class Moviedetail extends StatelessWidget {
                                 Icon(Icons.star, color: Colors.yellow),
                                 SizedBox(width: 4),
                                 Text(
-                                  movieRating,
+                                  widget.movieRating,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -171,20 +178,55 @@ class Moviedetail extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  Container(),
-                  Text(
-                    "Synopsis",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Color(0xffA7D4CB),
+                      border: Border(
+                        top: BorderSide(color: Colors.black),
+                        bottom: BorderSide(color: Colors.black),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    movieDescription,
-                    style: TextStyle(fontSize: 16),
-                    textAlign: TextAlign.justify,
-                  ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Synopsis",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        SizedBox(height: 8),
+                        AnimatedSize(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          child: Text(
+                            widget.movieDescription,
+                            maxLines:
+                                isExpanded ? null : 5, // Show 5 lines initially
+                            overflow: TextOverflow.fade,
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              isExpanded = !isExpanded;
+                            });
+                          },
+                          child: Text(
+                            isExpanded ? "Read Less" : "Read More",
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

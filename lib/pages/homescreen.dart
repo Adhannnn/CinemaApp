@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _pages = [
     Homepages(),
-    OwnTicketPages(),
+    Voucherpages(),
     Favoritepages(),
     Transactionpages(),
     ProfilePages(),

@@ -11,7 +11,6 @@ class Accountlogin extends StatefulWidget {
 }
 
 class _AccountloginState extends State<Accountlogin> {
-
   final AccountHelper accountHelper = AccountHelper();
 
   final TextEditingController emailController = TextEditingController();
@@ -28,24 +27,24 @@ class _AccountloginState extends State<Accountlogin> {
       return;
     }
 
-    // final isSuccess = await accountHelper.registerUser(
-    //   email: email,
-    //   password: password,
-    // );
+    final isSuccess = await accountHelper.loginUser(
+      email: email,
+      password: password,
+    );
 
-    // if (isSuccess) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('Welcome Back!')),
-    //   );
-    //   Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => HomeScreen()),
-    //   );
-    // } else {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('Username doesn`t exist or Password is wrong.')),
-    //   );
-    // }
+    if (isSuccess) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Welcome Back!')),
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Username doesn't exist or Password is wrong.")),
+      );
+    }
   }
 
   @override
@@ -54,124 +53,125 @@ class _AccountloginState extends State<Accountlogin> {
       backgroundColor: Color.fromARGB(255, 255, 253, 247),
       appBar: CustomBackButton(title: 'Sign in'),
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            alignment: Alignment.topCenter,
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(16, 14, 16, 42),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-
-                  // Header
-                  Padding(
-                    padding: const EdgeInsets.only(top: 24.0, bottom: 14.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Hi, welcome to Cinema Time!',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(255, 14, 37, 34),
-                          ),
-                        ),
-                        Text(
-                          'Before continue, Please enter your details.',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color.fromARGB(255, 14, 37, 34),
-                          ),
-                        )
-                      ],
-                    )
-                  ),
-
-                    // Text Editor and Button
-                  Container(
+          child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  alignment: Alignment.topCenter,
+                  child: Container(
                     padding: const EdgeInsets.fromLTRB(16, 14, 16, 42),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 245, 240, 224),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: Color.fromARGB(255, 14, 37, 34),
-                        width: 1.2,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          offset: const Offset(1, 2),
-                          blurRadius: 0,
-                        ),
-                      ],
-                    ),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        _buildTextField("Email", emailController),
-                        _buildTextField("Password", passwordController, obscureText: true),
-
-                        // login button
-                        const SizedBox(height: 24),
-                        SizedBox(
-                          height: 42,
-                          width: double.infinity,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  // color: Colors.black.withOpacity(0.2),
-                                  offset: Offset(1, 2),
-                                  // blurRadius: 4,
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                _handleSignIn();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(255, 255, 196, 64), // Warna tombol
-                                foregroundColor: Color.fromARGB(255, 14, 37, 34), // Warna teks
-                                padding: const EdgeInsets.symmetric(vertical: 8),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  side: BorderSide(
-                                    color: Color.fromARGB(
-                                        255, 14, 37, 34), // Tambahkan border
-                                    width: 1.2,
+                        //Header
+                        Padding(
+                            padding:
+                                const EdgeInsets.only(top: 24.0, bottom: 14.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Hi, welcome to Cinema Time!',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromARGB(255, 14, 37, 34),
                                   ),
                                 ),
-                                elevation:
-                                    0, // Set elevation ke 0 untuk menghindari shadow default
+                                Text(
+                                  'Before continue, Please enter your details.',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 14, 37, 34),
+                                  ),
+                                )
+                              ],
+                            )),
+
+                        //Text Editor and Button
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(16, 14, 16, 42),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 245, 240, 224),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: Color.fromARGB(255, 14, 37, 34),
+                              width: 1.2,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                offset: const Offset(1, 2),
+                                blurRadius: 0,
                               ),
-                              child: const Text(
-                                'Sign In',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              _buildTextField("Email", emailController),
+                              _buildTextField("Password", passwordController,
+                                  obscureText: true),
+
+                              // login button
+                              const SizedBox(height: 24),
+                              SizedBox(
+                                height: 42,
+                                width: double.infinity,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.2),
+                                        offset: Offset(1, 2),
+                                        blurRadius: 4,
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      _handleSignIn();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 255, 196, 64), // Warna tombol
+                                      foregroundColor: Color.fromARGB(
+                                          255, 14, 37, 34), // Warna teks
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        side: BorderSide(
+                                          color: Color.fromARGB(255, 14, 37,
+                                              34), // Tambahkan border
+                                          width: 1.2,
+                                        ),
+                                      ),
+                                      elevation:
+                                          0, // Set elevation ke 0 untuk menghindari shadow default
+                                    ),
+                                    child: const Text(
+                                      'Sign In',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            )
-          )
-        )
-      ),
+                  )))),
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller, {bool obscureText = false}) {
+  Widget _buildTextField(String label, TextEditingController controller,
+      {bool obscureText = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Column(
@@ -191,7 +191,8 @@ class _AccountloginState extends State<Accountlogin> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Color.fromARGB(255, 14, 37, 34), width: 1.2),
+              border: Border.all(
+                  color: Color.fromARGB(255, 14, 37, 34), width: 1.2),
             ),
             child: TextField(
               controller: controller,
