@@ -317,7 +317,7 @@ class _HomepagesState extends State<Homepages> {
                           movieTitle: allmovie[index].moviename,
                           movieDescription: allmovie[index].synopsis,
                           movieImage: allmovie[index].images,
-                          movieRating: allmovie[index].rating,
+                          movieRating: allmovie[index].rate,
                           movieYears: allmovie[index].years,
                           movieDuration: allmovie[index].time,
                           movieGenre: allmovie[index].genre,

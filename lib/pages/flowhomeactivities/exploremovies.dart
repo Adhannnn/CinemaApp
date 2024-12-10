@@ -1,4 +1,5 @@
 import 'package:cinema_application/widgets/custombackbutton.dart';
+import 'package:cinema_application/widgets/custombutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,6 +13,13 @@ class ExploreMovies extends StatefulWidget {
 class _ExploreMoviesState extends State<ExploreMovies> {
   final TextEditingController _controller = TextEditingController();
   bool _isEmptyText = true;
+  bool isVoucherClicked = false;
+
+  void _toggleButton() {
+    setState(() {
+      isVoucherClicked = !isVoucherClicked;
+    });
+  }
 
   void initState() {
     super.initState();
@@ -31,81 +39,101 @@ class _ExploreMoviesState extends State<ExploreMovies> {
     return Scaffold(
         backgroundColor: Color(0xffF5F0E0),
         appBar: CustomBackButton(
-          title: "",
-          showBottomBorder: false,
+            title: "",
+            showBottomBorder: false,
 
-          // Customing Custom Back Button
-          // this is a changer! - iam
-          trailingButton: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 13.5),
-                width: 80,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 196, 64),
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 14, 37, 34),
-                    width: 1.2,
+            // Customing Custom Back Button
+            // this is a changer! - iam
+            trailingButton: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 10, vertical: 13.5),
+                  width: 80,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 255, 196, 64),
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 14, 37, 34),
+                      width: 1.2,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(1, 2),
+                        color: Colors.black.withOpacity(1),
+                      ),
+                    ],
                   ),
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: const Offset(1, 2),
-                      color: Colors.black.withOpacity(1),
-                    ),
-                  ],
+                  child: GestureDetector(
+                      onTap: () {},
+                      child: Center(
+                        child: Text(
+                          "Location",
+                          // textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Montserrat",
+                              color: Color.fromARGB(255, 14, 37, 34)),
+                        ),
+                      )),
                 ),
-                child: GestureDetector(
-                  onTap: () {
-                    
-                  },
-                  child: Center(
-                    child: Text(
-                      "Location",
-                      // textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Montserrat",
-                        color: Color.fromARGB(255, 14, 37, 34)),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),
+                  width: 36,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 255, 196, 64),
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 14, 37, 34),
+                      width: 1.2,
                     ),
-                  )
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),
-                width: 36,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 196, 64),
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 14, 37, 34),
-                    width: 1.2,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(1, 2),
+                        color: Colors.black.withOpacity(1),
+                      ),
+                    ],
                   ),
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: const Offset(1, 2),
-                      color: Colors.black.withOpacity(1),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.search_rounded,
+                      color: Color.fromARGB(255, 14, 37, 34),
+                      size: 20,
                     ),
-                  ],
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    
-                  },
-                  icon: const Icon(
-                    Icons.search_rounded,
-                    color: Color.fromARGB(255, 14, 37, 34),
-                    size: 20,
                   ),
                 ),
-              ),
-            ],
-          )
-        ),
-        body: _searchField());
+              ],
+            )),
+        body: Column(
+          children: [
+            SizedBox(height: 8,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  text: 'Now',
+                  isClicked: !isVoucherClicked,
+                  onPressed: () => {_toggleButton()},
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                CustomButton(
+                    text: 'Upcoming',
+                    isClicked: isVoucherClicked,
+                    onPressed: () {
+                      _toggleButton();
+                    })
+              ],
+            ),
+            _searchField()
+          ],
+        ));
   }
 
   Widget _searchField() {
