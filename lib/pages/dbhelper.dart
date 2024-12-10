@@ -17,7 +17,7 @@ class DatabaseHelper {
     if (_database != null) return _database!;
 
     String dbPath = await getDatabasesPath();
-    String path = join(dbPath, 'example.db');
+    String path = join(dbPath, 'cinemaapp.db');
 
     // Check if database exists
     bool dbExists = await File(path).exists();
@@ -36,14 +36,59 @@ class DatabaseHelper {
           CREATE TABLE users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
-            age INTEGER NOT NULL
-          )
+            email TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL,
+            phoneNumber TEXT NOT NULL UNIQUE,
+            created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+          );
         ''');
         print("Database and table created");
       },
     );
 
     return _database!;
+  }
+
+  Future<Map<String, dynamic>?> getUserByEmail(String email) async {
+  final db = await database;
+  final result = await db.query(
+    'users',
+    where: 'email = ?',
+    whereArgs: [email],
+    limit: 1,
+  );
+
+  return result.isNotEmpty ? result.first : null;
+}
+
+
+  Future<int> insertUser(Map<String, dynamic> user) async {
+    try {
+      final db = await database;
+      return await db.insert('users', user);
+    } catch (e) {
+      print("Error inserting user: $e");
+      return -1; // Return -1 to indicate failure
+    }
+  }
+
+
+  // Get all users
+  Future<List<Map<String, dynamic>>> getUsers() async {
+    final db = await database;
+    return await db.query('users');
+  }
+
+  // Update a user
+  Future<int> updateUser(int id, Map<String, dynamic> user) async {
+    final db = await database;
+    return await db.update('users', user, where: 'id = ?', whereArgs: [id]);
+  }
+
+  // Delete a user
+  Future<int> deleteUser(int id) async {
+    final db = await database;
+    return await db.delete('users', where: 'id = ?', whereArgs: [id]);
   }
 
   // Close the database

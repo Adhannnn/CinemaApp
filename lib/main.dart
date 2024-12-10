@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cinema_application/pages/homescreen.dart';
 import 'package:cinema_application/pages/dbhelper.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart'; // Import FFI package
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'dart:io';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
