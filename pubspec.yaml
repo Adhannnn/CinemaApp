@@ -33,6 +33,7 @@ dependencies:
   
   # SQlite
   sqflite: ^2.3.0
+  sqflite_common_ffi: ^2.0.0
   
   path: ^1.8.3
 
