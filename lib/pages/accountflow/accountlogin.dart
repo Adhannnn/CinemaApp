@@ -1,6 +1,7 @@
 import 'package:cinema_application/pages/homescreen.dart';
 import 'package:flutter/material.dart';
 
+import 'package:cinema_application/pages/dbhelper.dart';
 import 'package:cinema_application/pages/accountflow/db_accounthelper.dart';
 import 'package:cinema_application/widgets/custombackbutton.dart';
 
@@ -31,6 +32,8 @@ class _AccountloginState extends State<Accountlogin> {
       email: email,
       password: password,
     );
+
+    if (isSuccess) await accountHelper.saveLoginAccount(email);
 
     if (isSuccess) {
       ScaffoldMessenger.of(context).showSnackBar(

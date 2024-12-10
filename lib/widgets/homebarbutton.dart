@@ -10,7 +10,7 @@ class HomeBarButton extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 4),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 253, 247),
         border: const Border(
