@@ -133,7 +133,7 @@ class _MoviedetailState extends State<Moviedetail> {
                                 SizedBox(width: 5),
                                 buildIconTextRow(
                                     iconPath: 'assets/icon/clock.svg',
-                                    text: widget.movieDuration),
+                                    text: '${widget.movieDuration} Min'),
                                 SizedBox(width: 5),
                                 Text(' | '),
                                 SizedBox(width: 5),
