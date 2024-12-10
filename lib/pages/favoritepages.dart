@@ -1,3 +1,4 @@
+import 'package:cinema_application/widgets/mainpagesbar.dart';
 import 'package:flutter/material.dart';
 
 class Favoritepages extends StatefulWidget {
@@ -10,7 +11,12 @@ class Favoritepages extends StatefulWidget {
 class _FavoritepagesState extends State<Favoritepages> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 253, 247),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(75),
+        child: MainPagesBar(title: 'Wishlist'),
+      ),
       body: Center(
         child: Text(
           "Favorite Pages"

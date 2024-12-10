@@ -1,4 +1,5 @@
 import 'package:cinema_application/widgets/custombutton.dart';
+import 'package:cinema_application/widgets/mainpagesbar.dart';
 import 'package:flutter/material.dart';
 
 class Voucherpages extends StatefulWidget {
@@ -20,49 +21,36 @@ class _VoucherpagesState extends State<Voucherpages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffF5F0E0),
-        appBar: appBar(),
-        body: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomButton(
-                  text: "Voucher",
-                  isClicked: isVoucherClicked,
-                  onPressed: () {
-                    if (!isVoucherClicked) {
-                      _toggleButton();
-                    }
-                  },
-                ),
-                SizedBox(width: 8),
-                CustomButton(
-                  text: "Coupon",
-                  isClicked: !isVoucherClicked,
-                  onPressed: () {
-                    if (isVoucherClicked) {
-                      _toggleButton();
-                    }
-                  },
-                ),
-              ],
-            )
-          ],
-        ));
-  }
-
-  AppBar appBar() {
-    return AppBar(
-      title: Text("My Voucher / Coupon"),
-      centerTitle: true,
-      titleTextStyle: TextStyle(
-        fontFamily: 'Montserrat-SemiBold',
-        fontSize: 20,
-        color: Colors.black,
-        letterSpacing: 0.12,
-      ),
-      backgroundColor: const Color(0xffF5F0E0),
+      backgroundColor: const Color.fromARGB(255, 255, 253, 247),
+      appBar: MainPagesBar(title: 'My Vouchers'),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomButton(
+                text: "Voucher",
+                isClicked: isVoucherClicked,
+                onPressed: () {
+                  if (!isVoucherClicked) {
+                    _toggleButton();
+                  }
+                },
+              ),
+              SizedBox(width: 8),
+              CustomButton(
+                text: "Coupon",
+                isClicked: !isVoucherClicked,
+                onPressed: () {
+                  if (isVoucherClicked) {
+                    _toggleButton();
+                  }
+                },
+              ),
+            ],
+          )
+        ],
+      )
     );
   }
 }
