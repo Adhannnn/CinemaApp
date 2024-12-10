@@ -169,8 +169,6 @@ class _AccountsignupState extends State<Accountsignup> {
                     ]
                   ),
                 )
-                
-                // Text Fields
               ],
             ),
           )
