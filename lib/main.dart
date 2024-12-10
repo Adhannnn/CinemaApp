@@ -1,18 +1,25 @@
 import 'dart:io';
+import 'package:cinema_application/pages/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cinema_application/pages/homescreen.dart';
 import 'package:cinema_application/pages/dbhelper.dart'; // Ensure dbhelper.dart uses sqflite
+import 'package:provider/provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-    // Initialize FFI (for desktop platforms)
-    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+  // Initialize FFI (for desktop platforms)
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AuthProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

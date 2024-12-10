@@ -97,4 +97,22 @@ class AllMovie {
 
     return listing;
   }
+
+  static List<AllMovie> getUpcoming() {
+    List<AllMovie> listing = [];
+
+    listing.add(AllMovie(
+        moviename: 'Superman',
+        images: 'assets/images/supermanlegacy.jpg',
+        rate: '-',
+        genre: 'Action',
+        time: '-',
+        rating: '-',
+        synopsis:
+            "Superman, a cub reporter in Metropolis, struggles to balance his Kryptonian heritage with his human upbringing. He embodies truth, justice, and the American way, guided by human kindness in a world that sees kindness as old-fashioned. ",
+        years: '2025',
+        watchlist: ''));
+
+    return listing;
+  }
 }
