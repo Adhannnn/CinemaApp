@@ -31,12 +31,15 @@ class AccountHelper {
       return false; // Email already exists
     }
 
+    String defaultProfileImage = 'assets/images/pngwing.com.png';
+
     // Add the user to the database
     final newUser = {
       'name': fullName,
       'email': email,
       'password': password, // Ensure password hashing for security
       'phoneNumber': phoneNumber,
+      'profile_image': defaultProfileImage
     };
 
     await dbHelper.insertUser(newUser);

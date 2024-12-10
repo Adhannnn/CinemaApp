@@ -1,4 +1,5 @@
 import 'package:cinema_application/models/listmovie.dart';
+import 'package:cinema_application/pages/detailmoviepages.dart';
 import 'package:cinema_application/widgets/custombackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -305,8 +306,26 @@ class _SearhfieldpagesState extends State<Searchfieldpages> {
     return ListView.builder(
       itemCount: filteredMovie.length,
       itemBuilder: (context, index) {
-        final movie = filteredMovie[index];
-        return _movieCard(movie);
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Moviedetail(
+                  movieTitle: filteredMovie[index].moviename,
+                  movieDescription: filteredMovie[index].synopsis,
+                  movieImage: filteredMovie[index].images,
+                  movieRating: filteredMovie[index].rating,
+                  movieYears: filteredMovie[index].years,
+                  movieDuration: filteredMovie[index].time,
+                  movieGenre: filteredMovie[index].genre,
+                  movieWatchlist: filteredMovie[index].watchlist,
+                ),
+              ),
+            );
+          },
+          child: _movieCard(filteredMovie[index]),
+        );
       },
     );
   }

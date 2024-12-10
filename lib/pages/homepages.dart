@@ -15,6 +15,7 @@ import 'package:cinema_application/models/film.dart';
 
 // Widgets
 import 'package:cinema_application/widgets/homebarbutton.dart';
+import 'package:cinema_application/widgets/sectionicon.dart';
 
 class Homepages extends StatefulWidget {
   const Homepages({super.key});
@@ -134,9 +135,13 @@ class _HomepagesState extends State<Homepages> {
           buildDivider(),
           buildSection('Points', '0'),
           buildDivider(),
-          buildSectionWithAnIcon('Vouchers', '1', 'assets/icon/ticketicon.svg'),
+          SectionWithIcon(
+              title: 'Vouchers',
+              value: '1',
+              icon: 'assets/icon/coupunicon.svg'),
           buildDivider(),
-          buildSectionWithAnIcon('Coupuns', '1', 'assets/icon/coupunicon.svg')
+          SectionWithIcon(
+              title: 'Coupons', value: '1', icon: 'assets/icon/discount.svg')
         ],
       ),
     );
@@ -164,50 +169,6 @@ class _HomepagesState extends State<Homepages> {
               fontSize: 12,
               letterSpacing: 0.12,
               color: Colors.black),
-        )
-      ],
-    );
-  }
-
-  // build section with an icon
-  Widget buildSectionWithAnIcon(String title, String value, String icon) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0, right: 16),
-          child: SvgPicture.asset(
-            icon,
-            width: 30,
-            height: 28,
-            fit: BoxFit.contain,
-          ),
-        ),
-        SizedBox(
-          height: 4,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                  fontFamily: "Montserrat-SemiBold",
-                  fontSize: 12,
-                  letterSpacing: 0.12,
-                  color: Colors.black),
-            ),
-            Text(
-              value,
-              style: TextStyle(
-                  fontFamily: "Montserrat-Medium",
-                  color: Color(0xff6A958C),
-                  letterSpacing: 0.12,
-                  fontSize: 12),
-            )
-          ],
         )
       ],
     );
@@ -360,6 +321,7 @@ class _HomepagesState extends State<Homepages> {
                           movieYears: allmovie[index].years,
                           movieDuration: allmovie[index].time,
                           movieGenre: allmovie[index].genre,
+                          movieWatchlist: allmovie[index].watchlist,
                         ),
                       ),
                     );
@@ -533,129 +495,127 @@ class _HomepagesState extends State<Homepages> {
 
   // Movie Card Widget
   Widget movieCard(AllMovie movie) {
-    for (int i = 0; i < allmovie.length; i++){
-
-    }
-      return Container(
-          width: 200,
-          margin: EdgeInsets.only(right: 10, bottom: 10),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color.fromARGB(255, 14, 37, 34),
-                width: 1.2,
-              ),
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  offset: const Offset(1, 2),
-                  color: Colors.black.withOpacity(1),
-                ),
-              ],
+    for (int i = 0; i < allmovie.length; i++) {}
+    return Container(
+        width: 200,
+        margin: EdgeInsets.only(right: 10, bottom: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 14, 37, 34),
+              width: 1.2,
             ),
-            // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            // clipBehavior: Clip.antiAlias,
-            child: Stack(
-              alignment: Alignment.topRight,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(
-                            8), // Adjust the radius value as needed
-                        topRight: Radius.circular(8),
-                      ),
-                      child: Image.asset(
-                        movie.images,
-                        fit: BoxFit.cover,
-                        height: 220,
-                        width: double.infinity,
-                      ),
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(1, 2),
+                color: Colors.black.withOpacity(1),
+              ),
+            ],
+          ),
+          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          // clipBehavior: Clip.antiAlias,
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                          8), // Adjust the radius value as needed
+                      topRight: Radius.circular(8),
                     ),
-
-                    // Movie Title and Genre
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 255, 196, 64),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8)),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(1, 2),
-                              color: Colors.black.withOpacity(1),
-                            ),
-                          ],
-                        ),
-                        padding: EdgeInsets.all(12),
-                        height: 60,
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 8, 0, 5),
-                              child: Text(
-                                movie.moviename,
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "Montserrat",
-                                    letterSpacing: 0.12),
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              movie.genre,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromARGB(255, 14, 37, 34),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Positioned(
-                  top: 10,
-                  right: 10,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 220, 85, 94),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.star_border_rounded,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        SizedBox(width: 4),
-                        Text(
-                          movie.rate,
-                          style: TextStyle(
-                              color: Color(0xffFFFDF7),
-                              fontFamily: "Montserrat-SemiBold",
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.12),
-                        ),
-                      ],
+                    child: Image.asset(
+                      movie.images,
+                      fit: BoxFit.cover,
+                      height: 220,
+                      width: double.infinity,
                     ),
                   ),
-                )
-              ],
-            ),
-          )
-          // ),
-          );
+
+                  // Movie Title and Genre
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 196, 64),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8)),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(1, 2),
+                            color: Colors.black.withOpacity(1),
+                          ),
+                        ],
+                      ),
+                      padding: EdgeInsets.all(12),
+                      height: 60,
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 8, 0, 5),
+                            child: Text(
+                              movie.moviename,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: "Montserrat",
+                                  letterSpacing: 0.12),
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            movie.genre,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color.fromARGB(255, 14, 37, 34),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                top: 10,
+                right: 10,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 220, 85, 94),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.star_border_rounded,
+                        color: Colors.white,
+                        size: 16,
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        movie.rate,
+                        style: TextStyle(
+                            color: Color(0xffFFFDF7),
+                            fontFamily: "Montserrat-SemiBold",
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.12),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        )
+        // ),
+        );
   }
 }

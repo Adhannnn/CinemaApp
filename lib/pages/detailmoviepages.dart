@@ -9,6 +9,7 @@ class Moviedetail extends StatefulWidget {
   final String movieYears;
   final String movieDuration;
   final String movieGenre;
+  final String movieWatchlist;
 
   const Moviedetail(
       {super.key,
@@ -18,7 +19,8 @@ class Moviedetail extends StatefulWidget {
       required this.movieRating,
       required this.movieYears,
       required this.movieDuration,
-      required this.movieGenre});
+      required this.movieGenre,
+      required this.movieWatchlist});
 
   @override
   State<Moviedetail> createState() => _MoviedetailState();
@@ -26,15 +28,16 @@ class Moviedetail extends StatefulWidget {
 
 class _MoviedetailState extends State<Moviedetail> {
   bool isExpanded = false;
+  int? selectedIndex;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Color(0xffF5F0E0),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: <Widget>[
             // Movie Banner Image
             Stack(
               children: [
@@ -122,55 +125,59 @@ class _MoviedetailState extends State<Moviedetail> {
                             Row(
                               children: [
                                 // For calendar
-                                SvgPicture.asset('assets/icon/calendar.svg'),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(widget.movieYears),
-                                SizedBox(
-                                  width: 5,
-                                ),
+                                buildIconTextRow(
+                                    iconPath: 'assets/icon/calendar.svg',
+                                    text: widget.movieYears),
+                                SizedBox(width: 5),
                                 Text(' | '),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                SvgPicture.asset('assets/icon/clock.svg'),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(widget.movieDuration),
-                                SizedBox(
-                                  width: 5,
-                                ),
+                                SizedBox(width: 5),
+                                buildIconTextRow(
+                                    iconPath: 'assets/icon/clock.svg',
+                                    text: widget.movieDuration),
+                                SizedBox(width: 5),
                                 Text(' | '),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                SvgPicture.asset('assets/icon/film.svg'),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(widget.movieGenre),
+                                SizedBox(width: 5),
+                                buildIconTextRow(
+                                    iconPath: 'assets/icon/film.svg',
+                                    text: widget.movieGenre),
                               ],
                             ),
                             SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Icon(Icons.star, color: Colors.yellow),
-                                SizedBox(width: 4),
-                                Text(
-                                  widget.movieRating,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                            Container(
+                              width: 335,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                  color: Color(0xffF5F0E0),
+                                  border: Border.all(
+                                      color: const Color.fromARGB(0, 0, 0, 0)),
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [BoxShadow(offset: Offset(1, 3))]),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 12.0), // Add padding for spacing
+                                    child: buildSectionWithAnIcon(
+                                      'Rating',
+                                      widget.movieRating,
+                                      'assets/icon/star2.svg',
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                  width: 20,
-                                ),
-                                Text("2.9k Watchlist"),
-                              ],
+                                  buildDivider(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 12.0), // Add padding for spacing
+                                    child: buildSectionWithAnIcon(
+                                      'Watchlist',
+                                      widget.movieWatchlist,
+                                      'assets/icon/heart.svg',
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -179,7 +186,7 @@ class _MoviedetailState extends State<Moviedetail> {
                   ),
                   const SizedBox(height: 16),
                   Container(
-                    width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: Color(0xffA7D4CB),
                       border: Border(
@@ -230,11 +237,317 @@ class _MoviedetailState extends State<Moviedetail> {
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 13),
             // Schedule Section
+
+            Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 251, 255, 254),
+                border: Border(
+                  bottom: BorderSide(color: Colors.black),
+                ),
+              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Title
+                  Text(
+                    "Show",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 12),
+
+                  // Date Selector Row
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xffF5F0E0),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border(
+                          top: BorderSide(color: Colors.black),
+                          left: BorderSide(color: Colors.black),
+                          bottom: BorderSide(color: Colors.black),
+                          right: BorderSide(color: Colors.black)),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(7, (index) {
+                        final DateTime today = DateTime.now();
+                        final DateTime date = today.add(Duration(days: index));
+                        final isSelected = selectedIndex == index;
+
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedIndex =
+                                  index; // Update the selected index
+                            });
+                          },
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: isSelected
+                                      ? const Color.fromARGB(255, 253, 253, 253)
+                                      : Colors.transparent,
+                                  borderRadius: isSelected
+                                      ? BorderRadius.circular(8)
+                                      : null,
+                                  border: isSelected
+                                      ? Border(
+                                          top: BorderSide(color: Colors.black),
+                                          left: BorderSide(color: Colors.black),
+                                          right:
+                                              BorderSide(color: Colors.black),
+                                          bottom:
+                                              BorderSide(color: Colors.black),
+                                        )
+                                      : Border(
+                                          left: BorderSide(color: Colors.black),
+                                          right:
+                                              BorderSide(color: Colors.black),
+                                          top: BorderSide
+                                              .none, // or any other default border
+                                          bottom: BorderSide
+                                              .none, // or any other default border
+                                        ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      date.day.toString(),
+                                      style: TextStyle(
+                                        color: isSelected
+                                            ? const Color.fromARGB(
+                                                255, 255, 0, 0)
+                                            : Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    Text(
+                                      [
+                                        "Mon",
+                                        "Tue",
+                                        "Wed",
+                                        "Thu",
+                                        "Fri",
+                                        "Sat",
+                                        "Sun"
+                                      ][date.weekday - 1],
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: isSelected
+                                            ? const Color.fromARGB(
+                                                255, 255, 6, 6)
+                                            : Colors.black54,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                            ],
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+
+                  // Theater and Showtimes Section
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Theater Name
+                      Container(
+                        width: double.infinity, // Full-width container
+                        padding: EdgeInsets.all(16), // Inner padding
+                        decoration: BoxDecoration(
+                          color: Color(0xffF5F0E0), // Light background color
+                          borderRadius:
+                              BorderRadius.circular(8), // Rounded corners
+                          border: Border(
+                              top: BorderSide(color: Colors.black),
+                              left: BorderSide(color: Colors.black),
+                              bottom: BorderSide(color: Colors.black),
+                              right: BorderSide(color: Colors.black)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 4,
+                              offset: Offset(2, 2), // Shadow offset
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Theater Name
+                            Text(
+                              "Aeon Mall JGC",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+
+                            // Ticket Type and Price
+                            Row(
+                              children: [
+                                Text(
+                                  "REGULER",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  "From Rp. 55.000",
+                                  style: TextStyle(
+                                      color: Colors.black54, fontSize: 12),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 16),
+
+                            // Showtimes
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: List.generate(4, (index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // Handle showtime selection
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 8),
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color(0xFFFFD54F), // Button color
+                                        borderRadius: BorderRadius.circular(
+                                            8), // Rounded corners
+                                        border:
+                                            Border.all(color: Colors.black87),
+                                        boxShadow: [
+                                          BoxShadow(offset: Offset(1, 2))
+                                        ]),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "16:20 - 18:28",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        SizedBox(height: 4),
+                                        Text(
+                                          "178/178 Seat",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
+    );
+  }
+
+  // for an icon below the Title
+  Widget buildIconTextRow({required String iconPath, required String text}) {
+    return Row(
+      children: [
+        SvgPicture.asset(iconPath),
+        SizedBox(width: 4),
+        Text(text),
+      ],
+    );
+  }
+
+  Widget buildSectionWithAnIcon(String title, String value, String icon) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: SvgPicture.asset(
+            icon,
+            width: 30,
+            height: 28,
+            fit: BoxFit.contain,
+          ),
+        ),
+        SizedBox(
+          height: 4,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                  fontFamily: "Montserrat-Medium",
+                  fontSize: 12,
+                  letterSpacing: 0.12,
+                  color: Colors.black),
+            ),
+            Text(
+              value,
+              style: TextStyle(
+                  fontFamily: "Montserrat-SemiBold",
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  letterSpacing: 0.12,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14),
+            )
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget buildDivider() {
+    return Container(
+      height: 37,
+      width: 1,
+      color: Colors.black,
     );
   }
 }

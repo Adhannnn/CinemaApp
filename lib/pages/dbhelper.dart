@@ -42,7 +42,8 @@ class DatabaseHelper {
               email TEXT NOT NULL UNIQUE,
               password TEXT NOT NULL,
               phoneNumber TEXT NOT NULL UNIQUE,
-              created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+              created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+              profile_image BLOB
             );
           ''');
           print("Database and table created");
