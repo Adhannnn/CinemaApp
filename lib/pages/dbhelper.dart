@@ -98,7 +98,7 @@ class DatabaseHelper {
         await db.execute('''
           CREATE TABLE login (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL
+            username TEXT NOT NULL UNIQUE
           );
         ''');
         print("Database and tables created");
@@ -155,13 +155,28 @@ class DatabaseHelper {
     try {
       final db = await database;
       final result = await db.insert('login', email);
-      print("User inserted with id: $result");
       return result;
     } catch (e) {
-      print("Error inserting user: $e");
       return -1; // Return -1 to indicate failure
     }
   }
+
+  // Delete the account from last login
+  Future<int> deleteLogin(String email) async {
+  try {
+    final db = await database;
+    final result = await db.delete(
+      'login',
+      where: 'username = ?',
+      whereArgs: [email],
+    );
+    print("User deleted with id: $result");
+    return result; // Returns the number of rows affected
+  } catch (e) {
+    print("Error deleting user: $e");
+    return -1; // Return -1 to indicate failure
+  }
+}
 
   // Update a user's details
   Future<int> updateUser(int id, Map<String, dynamic> user) async {

@@ -1,16 +1,16 @@
-
-import 'package:cinema_application/pages/accountflow/accountsetup.dart';
-
 import 'dart:io';
-
-
-import 'package:cinema_application/pages/accountflow/db_accounthelper.dart';
-import 'package:cinema_application/pages/dbhelper.dart';
-import 'package:cinema_application/pages/editactivities/editprofile.dart';
-import 'package:cinema_application/widgets/mainpagesbar.dart';
+import 'dart:ui';
+import 'package:cinema_application/pages/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:cinema_application/pages/accountflow/accountsetup.dart';
+import 'package:cinema_application/pages/accountflow/db_accounthelper.dart';
+import 'package:cinema_application/pages/dbhelper.dart';
+import 'package:cinema_application/pages/editactivities/editprofile.dart';
+
+import 'package:cinema_application/widgets/mainpagesbar.dart';
 
 class ProfilePages extends StatefulWidget {
   const ProfilePages({super.key});
@@ -53,6 +53,22 @@ class _ProfilePagesState extends State<ProfilePages> {
         return;
       }
     }
+  }
+
+  void _deleteLoginStatus() async {
+    String? lastLoginEmail = await AccountHelper().getLastLoginAccount();
+
+    if (lastLoginEmail != null) {
+      // Attempt to delete the login
+      final result = await DatabaseHelper().deleteLogin(lastLoginEmail);
+      if (result > 0) {
+        setState(() {
+          _isLoggedIn = false;
+          _userDetails = null;
+        });
+        return;
+      }
+    }
 
     // If no account is logged in or no user details found
     setState(() {
@@ -71,7 +87,7 @@ class _ProfilePagesState extends State<ProfilePages> {
       ),
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
           child: _isLoggedIn ? loginAccount(context) : notLogin(context),
         ),
       ),
@@ -174,92 +190,321 @@ class _ProfilePagesState extends State<ProfilePages> {
   }
 
   Widget loginAccount(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 20, left: 15),
-          width: 343,
-          height: 86,
-          decoration: BoxDecoration(
-            color: const Color(0xffF5F0E0),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.black), // Cleaner border shorthand
-          ),
-          child: Row(
-            children: [
-              // Profile Picture
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: CircleAvatar(
-                  radius: 24,
-                  backgroundImage: picturepath != null
-                      ? FileImage(File(picturepath!))
-                      : AssetImage('assets/images/pngwing.com.png')
-                          as ImageProvider,
-                ),
-              ),
-              // Name and Email
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${_userDetails?['name'] ?? 'User'}", // Safely access the name
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      _userDetails != null
-                          ? _userDetails!['email'] ?? 'Email not available'
-                          : 'Email not available',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              // Edit Icon
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Editprofile()));
-                  },
+    return Center(
+      child: 
+      Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            // margin: const EdgeInsets.only(top: 20, left: 15),
+            height: 86,
+            decoration: BoxDecoration(
+              color: const Color(0xffF5F0E0),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.black), // Cleaner border shorthand
+            ),
+            child: Row(
+              children: [
+                // Profile Picture
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Container(
-                    width: 40.34,
-                    height: 40.37,
+                    width: 48, // Adjust size based on the radius + border thickness
+                    height: 48,
                     decoration: BoxDecoration(
-                        border: Border(
-                            top: BorderSide(color: Colors.black),
-                            left: BorderSide(color: Colors.black)),
-                        color: Color(0xffA7D4CB),
-                        borderRadius: BorderRadius.circular(6),
-                        boxShadow: [BoxShadow(offset: Offset(2, 4))]),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icon/edit.svg',
-                          width: 30.3,
-                          height: 30.3,
-                        )
-                      ],
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Color.fromARGB(255, 14, 37, 34), // Border color
+                        width: 1.2,         // Border thickness
+                      ),
+                    ),
+                    child: CircleAvatar(
+                      radius: 24,
+                      backgroundImage: picturepath != null
+                          ? FileImage(File(picturepath!))
+                          : AssetImage('assets/images/pngwing.com.png') as ImageProvider,
                     ),
                   ),
                 ),
-              ),
-            ],
+                // Name and Email
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${_userDetails?['name'] ?? 'User'}", // Safely access the name
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        _userDetails != null
+                            ? _userDetails!['email'] ?? 'Email not available'
+                            : 'Email not available',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Edit Icon
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Editprofile()));
+                    },
+                    child: Container(
+                      width: 40.34,
+                      height: 40.37,
+                      decoration: BoxDecoration(
+                          border: Border(
+                              top: BorderSide(color: Colors.black),
+                              left: BorderSide(color: Colors.black)),
+                          color: Color(0xffA7D4CB),
+                          borderRadius: BorderRadius.circular(6),
+                          boxShadow: [BoxShadow(offset: Offset(2, 4))]),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icon/edit.svg',
+                            width: 30.3,
+                            height: 30.3,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+
+          //logout button
+          const SizedBox(height: 24),
+          SizedBox(
+            height: 52,
+            width: double.infinity,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    // color: Colors.black.withOpacity(0.2),
+                    offset: Offset(1, 2),
+                    // blurRadius: 4,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  logOutDiagog(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 255, 253, 247), // Warna tombol
+                  foregroundColor:Color.fromARGB(255, 106, 149, 140), // Warna teks
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(
+                      color: Color.fromARGB(255, 28, 195, 159), // Tambahkan border
+                      width: 1.2,
+                    ),
+                  ),
+                  elevation: 0, // Set elevation ke 0 untuk menghindari shadow default
+                ),
+                child: const Text(
+                  'Log out',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 106, 149, 140),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700),
+                ),
+              ),
+            ),
+          ),
+        ],
+      )
+    );
+  }
+
+  void logOutDiagog(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: "BlurredDialog",
+      transitionDuration: Duration(milliseconds: 190),
+      pageBuilder: (context, anim1, anim2) {
+        return Stack(
+          children: [
+            // Static blur background
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                child: Container(
+                  color: Color.fromARGB(255, 255, 253, 247).withOpacity(0.58),
+                ),
+              ),
+            ),
+
+            // The Page
+            Align(
+              alignment: Alignment.center,
+
+              // Page as Animation
+              child: SlideTransition(
+                position: Tween<Offset>(
+                  begin: Offset(0, 1), // Start from bottom
+                  end: Offset(0, 0), // End at center
+                ).animate(CurvedAnimation(
+                  parent: anim1,
+                  curve: Curves.easeOut, // Smooth animation curve
+                )),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Color(0xffFFFDF7),
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 14, 37, 34),
+                      width: 1.2,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // The Title
+                      Center(
+                        child: Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: Text(
+                              "Are you sure?",
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                                decorationThickness: 0,
+                              ),
+                            ),
+                          ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(height: 24),
+                            SizedBox(
+                              height: 42,
+                              width: 130,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      // color: Colors.black.withOpacity(0.2),
+                                      offset: Offset(1, 2),
+                                      // blurRadius: 4,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    _deleteLoginStatus();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => HomeScreen())
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(255, 255, 253, 247), // Warna tombol
+                                    foregroundColor:Color.fromARGB(255, 106, 149, 140), // Warna teks
+                                    padding: const EdgeInsets.symmetric(vertical: 8),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      side: BorderSide(
+                                        color: Color.fromARGB(255, 106, 149, 140), // Tambahkan border
+                                        width: 1.2,
+                                      ),
+                                    ),
+                                    elevation: 0, // Set elevation ke 0 untuk menghindari shadow default
+                                  ),
+                                  child: const Text(
+                                    'Log out',
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 106, 149, 140),
+                                        fontSize: 16, fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            //Cancel button
+                            SizedBox(
+                              height: 42,
+                              width: 130,
+                              child: Container(
+                                margin: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      // color: Colors.black.withOpacity(0.2),
+                                      offset: Offset(1, 2),
+                                      // blurRadius: 4,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(255, 14, 37, 34), // Warna tombol
+                                    foregroundColor:Color.fromARGB(255, 14, 37, 34), // Warna teks
+                                    padding: const EdgeInsets.symmetric(vertical: 8),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      side: BorderSide(
+                                        color: Color.fromARGB(
+                                            255, 14, 37, 34), // Tambahkan border
+                                        width: 1.2,
+                                      ),
+                                    ),
+                                    elevation: 0, // Set elevation ke 0 untuk menghindari shadow default
+                                  ),
+                                  child: const Text(
+                                    'Cancel',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                        fontSize: 16, fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]
+                        )
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

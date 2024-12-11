@@ -43,7 +43,7 @@ class _MoviedetailState extends State<Moviedetail> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 250,
+                  height: 220,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
@@ -90,102 +90,112 @@ class _MoviedetailState extends State<Moviedetail> {
             ),
             // Movie Details
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(0.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      // Movie Poster
-                      Container(
-                        width: 100,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
-                            image: AssetImage(widget.movieImage),
-                            fit: BoxFit.cover,
+                  // container title, rate, and wishlist
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(16, 18, 16, 6),
+                    child: 
+                    Row(
+                      children: [
+                        // Movie Poster
+                        Container(
+                          width: 100,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            image: DecorationImage(
+                              image: AssetImage(widget.movieImage),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 16),
-                      // Movie Info
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.movieTitle,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                        const SizedBox(width: 16),
+                        // Movie Info
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.movieTitle,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 8),
-                            Row(
-                              children: [
-                                // For calendar
-                                buildIconTextRow(
-                                    iconPath: 'assets/icon/calendar.svg',
-                                    text: widget.movieYears),
-                                SizedBox(width: 5),
-                                Text(' | '),
-                                SizedBox(width: 5),
-                                buildIconTextRow(
-                                    iconPath: 'assets/icon/clock.svg',
-                                    text: '${widget.movieDuration} Min'),
-                                SizedBox(width: 5),
-                                Text(' | '),
-                                SizedBox(width: 5),
-                                buildIconTextRow(
-                                    iconPath: 'assets/icon/film.svg',
-                                    text: widget.movieGenre),
-                              ],
-                            ),
-                            SizedBox(height: 16),
-                            Container(
-                              width: 335,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  color: Color(0xffF5F0E0),
-                                  border: Border.all(
-                                      color: const Color.fromARGB(0, 0, 0, 0)),
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [BoxShadow(offset: Offset(1, 3))]),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                              SizedBox(height: 8),
+                              Row(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 12.0), // Add padding for spacing
-                                    child: buildSectionWithAnIcon(
-                                      'Rating',
-                                      widget.movieRating,
-                                      'assets/icon/star2.svg',
-                                    ),
-                                  ),
-                                  buildDivider(),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 12.0), // Add padding for spacing
-                                    child: buildSectionWithAnIcon(
-                                      'Watchlist',
-                                      widget.movieWatchlist,
-                                      'assets/icon/heart.svg',
-                                    ),
-                                  ),
+                                  // For calendar
+                                  buildIconTextRow(
+                                      iconPath: 'assets/icon/calendar.svg',
+                                      text: widget.movieYears),
+                                  SizedBox(width: 5),
+                                  Text(' | '),
+                                  SizedBox(width: 5),
+                                  buildIconTextRow(
+                                      iconPath: 'assets/icon/clock.svg',
+                                      text: '${widget.movieDuration} Min'),
+                                  SizedBox(width: 5),
+                                  Text(' | '),
+                                  SizedBox(width: 5),
+                                  buildIconTextRow(
+                                      iconPath: 'assets/icon/film.svg',
+                                      text: widget.movieGenre),
                                 ],
                               ),
-                            ),
-                          ],
+                              SizedBox(height: 16),
+                              Container(
+                                width: 335,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 245, 240, 224),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: Colors.black),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: const Offset(1.6, 2.8),
+                                      color: Colors.black.withOpacity(1),
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 12.0), // Add padding for spacing
+                                      child: buildSectionWithAnIcon(
+                                        'Rating',
+                                        widget.movieRating,
+                                        'assets/icon/star2.svg',
+                                      ),
+                                    ),
+                                    buildDivider(),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 12.0), // Add padding for spacing
+                                      child: buildSectionWithAnIcon(
+                                        'Watchlist',
+                                        widget.movieWatchlist,
+                                        'assets/icon/heart.svg',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Container(
+                    padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: Color(0xffA7D4CB),
@@ -194,7 +204,6 @@ class _MoviedetailState extends State<Moviedetail> {
                         bottom: BorderSide(color: Colors.black),
                       ),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,12 +211,11 @@ class _MoviedetailState extends State<Moviedetail> {
                         Text(
                           "Synopsis",
                           style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
                           ),
                           textAlign: TextAlign.start,
                         ),
-                        SizedBox(height: 8),
                         AnimatedSize(
                           duration: Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
@@ -216,7 +224,7 @@ class _MoviedetailState extends State<Moviedetail> {
                             maxLines:
                                 isExpanded ? null : 5, // Show 5 lines initially
                             overflow: TextOverflow.fade,
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                             textAlign: TextAlign.justify,
                           ),
                         ),
@@ -228,7 +236,12 @@ class _MoviedetailState extends State<Moviedetail> {
                           },
                           child: Text(
                             isExpanded ? "Read Less" : "Read More",
-                            style: TextStyle(color: Colors.blue),
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ],

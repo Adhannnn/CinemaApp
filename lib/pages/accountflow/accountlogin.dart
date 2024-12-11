@@ -76,7 +76,7 @@ class _AccountloginState extends State<Accountlogin> {
                                 Text(
                                   'Hi, welcome to Cinema Time!',
                                   style: TextStyle(
-                                    fontSize: 24,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w600,
                                     color: Color.fromARGB(255, 14, 37, 34),
                                   ),
@@ -125,9 +125,8 @@ class _AccountloginState extends State<Accountlogin> {
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withOpacity(0.2),
+                                        color: Colors.black.withOpacity(1),
                                         offset: Offset(1, 2),
-                                        blurRadius: 4,
                                       ),
                                     ],
                                     borderRadius: BorderRadius.circular(8),
@@ -139,20 +138,17 @@ class _AccountloginState extends State<Accountlogin> {
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color.fromARGB(
                                           255, 255, 196, 64), // Warna tombol
-                                      foregroundColor: Color.fromARGB(
-                                          255, 14, 37, 34), // Warna teks
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8),
+                                      foregroundColor:Color.fromARGB(255, 14, 37, 34), // Warna teks
+                                      padding: const EdgeInsets.symmetric(vertical: 8),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                         side: BorderSide(
-                                          color: Color.fromARGB(255, 14, 37,
-                                              34), // Tambahkan border
+                                          color: Color.fromARGB(
+                                              255, 14, 37, 34), // Tambahkan border
                                           width: 1.2,
                                         ),
                                       ),
-                                      elevation:
-                                          0, // Set elevation ke 0 untuk menghindari shadow default
+                                      elevation: 0, // Set elevation ke 0 untuk menghindari shadow default
                                     ),
                                     child: const Text(
                                       'Sign In',

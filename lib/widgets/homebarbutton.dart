@@ -33,9 +33,15 @@ class HomeBarButton extends StatelessWidget implements PreferredSizeWidget {
               // Logo
               Container(
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 196, 64),
                 ),
-                child: Text('Logo'),
+                child: Text(
+                  'Cinema Time',
+                  style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  )
+                ),
               ),
 
               // Icons Container

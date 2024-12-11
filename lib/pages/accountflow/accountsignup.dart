@@ -77,7 +77,7 @@ class _AccountsignupState extends State<Accountsignup> {
                       Text(
                         'Let’s get started!',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.w600,
                           color: Color.fromARGB(255, 14, 37, 34),
                         ),
@@ -127,9 +127,8 @@ class _AccountsignupState extends State<Accountsignup> {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                // color: Colors.black.withOpacity(0.2),
+                                color: Colors.black.withOpacity(1),
                                 offset: Offset(1, 2),
-                                // blurRadius: 4,
                               ),
                             ],
                             borderRadius: BorderRadius.circular(8),

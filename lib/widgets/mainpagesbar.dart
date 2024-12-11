@@ -15,12 +15,12 @@ class MainPagesBar extends StatelessWidget implements PreferredSizeWidget {
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 255, 253, 247),
-        border: Border(
-          bottom: BorderSide(
-            color: Color.fromARGB(255, 14, 37, 34),
-            width: 1.2,
-          ),
-        ),
+        // border: Border(
+        //   bottom: BorderSide(
+        //     color: Color.fromARGB(255, 14, 37, 34),
+        //     width: 1.2,
+        //   ),
+        // ),
       ),
       child: Center(
         child: Text(

@@ -449,45 +449,6 @@ class _HomepagesState extends State<Homepages> {
                           },
                         ),
                       ),
-
-                      //apus ini kalau udah selesai
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 0, vertical: 13.5),
-                        width: 36,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 196, 64),
-                          border: Border.all(
-                            color: const Color.fromARGB(255, 14, 37, 34),
-                            width: 1.2,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(1, 2),
-                              color: Colors.black.withOpacity(1),
-                            ),
-                          ],
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Moviedetails()));
-                          },
-                          child: Text(
-                            "Movie Details Test",
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontFamily: "Montserrat",
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 14, 37, 34),
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),

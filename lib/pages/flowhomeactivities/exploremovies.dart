@@ -1,4 +1,5 @@
 import 'package:cinema_application/models/listmovie.dart';
+import 'package:cinema_application/pages/flowhomeactivities/searchfieldpages.dart';
 import 'package:cinema_application/widgets/custombackbutton.dart';
 import 'package:cinema_application/widgets/custombutton.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +94,14 @@ class _ExploreMoviesState extends State<ExploreMovies> {
                 ],
               ),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Searchfieldpages()
+                    )
+                  );
+                },
                 icon: const Icon(
                   Icons.search_rounded,
                   color: Color.fromARGB(255, 14, 37, 34),

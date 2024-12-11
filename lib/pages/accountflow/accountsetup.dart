@@ -20,7 +20,7 @@ class Accountsetup extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               // Logo
-              Text('Logo',
+              Text('Cinema Time',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
