@@ -109,7 +109,6 @@ class _ExploreMoviesState extends State<ExploreMovies> {
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-            margin: const EdgeInsets.fromLTRB(0, 0, 0, 4),
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
@@ -139,7 +138,7 @@ class _ExploreMoviesState extends State<ExploreMovies> {
           // Movie List Display
           Expanded(
             child: Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 0, 28),
+              margin: const EdgeInsets.fromLTRB(0, 4, 0, 28),
               child: ListView.builder(
                 itemCount:
                     isVoucherClicked ? upcomingMovies.length : nowMovies.length,
