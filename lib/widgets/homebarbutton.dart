@@ -1,8 +1,8 @@
-import 'package:cinema_application/pages/accountflow/accountsetup.dart';
 import 'package:cinema_application/pages/auth/auth.dart';
-import 'package:cinema_application/pages/profilepages.dart';
-import 'package:flutter/material.dart';
 import 'package:cinema_application/pages/searchfieldpages.dart';
+import 'package:flutter/material.dart';
+import 'package:cinema_application/pages/accountflow/accountsetup.dart';
+import 'package:cinema_application/pages/profilepages.dart';
 import 'package:provider/provider.dart';
 
 class HomeBarButton extends StatelessWidget implements PreferredSizeWidget {
@@ -103,13 +103,13 @@ class HomeBarButton extends StatelessWidget implements PreferredSizeWidget {
                         iconSize: 19,
                         onPressed: () {
                           if (isLogIn) {
-                            // Navigate to ProfilePages if logged in
+                            // Instead of replacing the HomeScreen, navigate within it
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ProfilePages()));
                           } else {
-                            // Navigate to Accountsetup if not logged in
+                            // Navigate to AccountSetup without replacing the BottomNavbar
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

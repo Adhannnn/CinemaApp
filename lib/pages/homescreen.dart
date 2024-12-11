@@ -4,7 +4,6 @@ import 'package:cinema_application/pages/ownticketpages.dart';
 import 'package:cinema_application/pages/profilepages.dart';
 import 'package:cinema_application/pages/transactionpages.dart';
 import 'package:cinema_application/widgets/buttomnavbar.dart';
-// import 'package:cinema_application/widgets/homebarbutton.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Voucherpages(),
     Favoritepages(),
     Transactionpages(),
-    ProfilePages(),
+    ProfilePages(), // Profile page is here, part of the _pages list
   ];
 
   int _selectedIndex = 0;
@@ -35,8 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5F0E0),
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: Buttomnavbar(onItemTap: _onItemTap),
+      body: _pages[_selectedIndex], // Displays the selected page
+      bottomNavigationBar:
+          Buttomnavbar(onItemTap: _onItemTap), // The BottomNavbar stays intact
     );
   }
 }
