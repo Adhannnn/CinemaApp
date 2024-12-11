@@ -178,7 +178,7 @@ class _ProfilePagesState extends State<ProfilePages> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.only(top: 20, left: 35),
+          margin: const EdgeInsets.only(top: 20, left: 15),
           width: 343,
           height: 86,
           decoration: BoxDecoration(
