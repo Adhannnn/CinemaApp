@@ -125,16 +125,28 @@ class DatabaseHelper {
     return result.isNotEmpty ? result.first : null;
   }
 
-  // Insert a new user into the database
+  // Insert a new user into users table
   Future<int> insertUser(Map<String, dynamic> user) async {
     try {
       final db = await database;
       final result = await db.insert('users', user);
-      print("User inserted with id: $result");
       return result;
     } catch (e) {
-      print("Error inserting user: $e");
-      return -1; // Return -1 to indicate failure
+      return -1; //indicate failure
+    }
+  }
+  
+  // Get all info about user in users table
+  Future<List<Map<String, dynamic>>> getAllUsers() async {
+    try {
+      final db = await database; // Open the database connection
+      final List<Map<String, dynamic>> result = await db.query('users');
+
+      print("All users: $result");
+      return result; // Return the list of all users
+    } catch (e) {
+      print("Error retrieving users: $e");
+      return []; // Return an empty list on error
     }
   }
 

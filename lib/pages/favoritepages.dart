@@ -14,7 +14,7 @@ class _FavoritepagesState extends State<Favoritepages> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 253, 247),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(75),
+        preferredSize: const Size.fromHeight(64),
         child: MainPagesBar(title: 'Wishlist'),
       ),
       body: Center(

@@ -22,7 +22,10 @@ class _VoucherpagesState extends State<Voucherpages> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 253, 247),
-      appBar: MainPagesBar(title: 'My Vouchers'),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(64),
+        child: MainPagesBar(title: 'My Vouchers'),
+      ),
       body: Column(
         children: [
           Row(

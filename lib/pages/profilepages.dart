@@ -1,3 +1,4 @@
+import 'package:cinema_application/pages/accountflow/accountsetup.dart';
 import 'package:cinema_application/pages/accountflow/db_accounthelper.dart';
 import 'package:cinema_application/pages/dbhelper.dart';
 import 'package:cinema_application/widgets/mainpagesbar.dart';
@@ -48,11 +49,12 @@ class _ProfilePagesState extends State<ProfilePages> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 253, 247),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(75),
+        preferredSize: const Size.fromHeight(64),
         child: MainPagesBar(title: 'Profile'),
       ),
       body: SafeArea(
         child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           child: _isLoggedIn ? loginAccount(context) : notLogin(context),
         ),
       ),
@@ -60,10 +62,96 @@ class _ProfilePagesState extends State<ProfilePages> {
   }
 
   Widget notLogin(BuildContext context) {
-    return Center(
-      child: Text(
-        "Not logged in yet.",
-        style: const TextStyle(fontSize: 20, color: Colors.red),
+    return Container(
+      alignment: Alignment.topCenter,
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Button and Text Container
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 245, 240, 224),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: Color.fromARGB(255, 14, 37, 34),
+                width: 1.2,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  offset: const Offset(1, 2),
+                  blurRadius: 0,
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Text
+                Text(
+                  "You're not logged in. Set up your account to access personalized features and manage your profile.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+
+                //Login Button
+                const SizedBox(height: 24),
+                SizedBox(
+                  height: 42,
+                  width: double.infinity,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          // color: Colors.black.withOpacity(0.2),
+                          offset: Offset(1, 2),
+                          // blurRadius: 4,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Accountsetup()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(
+                            255, 255, 196, 64), // Warna tombol
+                        foregroundColor:
+                            Color.fromARGB(255, 14, 37, 34), // Warna teks
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                            color: Color.fromARGB(255, 14, 37, 34), // Tambahkan border
+                            width: 1.2,
+                          ),
+                        ),
+                        elevation: 0, // Set elevation ke 0 untuk menghindari shadow default
+                      ),
+                      child: const Text(
+                        'Setup Account',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

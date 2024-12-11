@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 // Package
-import 'package:cinema_application/pages/detailmoviepages.dart';
+import 'package:cinema_application/pages/flowhomeactivities/detailmoviepages.dart';
 import 'package:cinema_application/pages/flowhomeactivities/exploremovies.dart';
 import 'package:cinema_application/pages/flowhomeactivities/moviedetails.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class _HomepagesState extends State<Homepages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5F0E0),
+      backgroundColor: Color.fromARGB(255, 255, 253, 247),
       appBar: HomeBarButton(
         title: '',
       ),

@@ -15,7 +15,7 @@ Widget build(BuildContext context) {
   return Scaffold(
     backgroundColor: const Color.fromARGB(255, 255, 253, 247),
     appBar: PreferredSize(
-      preferredSize: const Size.fromHeight(75),
+      preferredSize: const Size.fromHeight(64),
       child: MainPagesBar(title: 'Transaction'),
     ),
     body: const Center(

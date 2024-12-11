@@ -11,7 +11,6 @@ class MainPagesBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
       margin: const EdgeInsets.fromLTRB(0, 24, 0, 0),
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       decoration: const BoxDecoration(
@@ -39,5 +38,5 @@ class MainPagesBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(75.0);
+  Size get preferredSize => const Size.fromHeight(64.0);
 }

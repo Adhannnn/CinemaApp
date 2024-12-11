@@ -1,5 +1,5 @@
 import 'package:cinema_application/models/listmovie.dart';
-import 'package:cinema_application/pages/detailmoviepages.dart';
+import 'package:cinema_application/pages/flowhomeactivities/detailmoviepages.dart';
 import 'package:cinema_application/widgets/custombackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -56,7 +56,7 @@ class _SearhfieldpagesState extends State<Searchfieldpages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5F0E0),
+      backgroundColor: Color.fromARGB(255, 255, 253, 247),
       appBar: CustomBackButton(title: 'Search'),
       body: Column(
         children: [
@@ -73,13 +73,7 @@ class _SearhfieldpagesState extends State<Searchfieldpages> {
     return Container(
       margin: const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.11),
-            blurRadius: 40,
-            spreadRadius: 0.0,
-          ),
-        ],
+        color: Color.fromARGB(255, 255, 253, 247),
       ),
       child: Row(
         children: [
