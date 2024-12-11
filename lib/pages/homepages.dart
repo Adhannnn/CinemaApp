@@ -1,12 +1,13 @@
 import 'dart:ui';
 
 // Package
-import 'package:cinema_application/pages/flowhomeactivities/detailmoviepages.dart';
+import 'package:cinema_application/pages/detailmoviepages.dart';
 import 'package:cinema_application/pages/flowhomeactivities/exploremovies.dart';
 import 'package:cinema_application/pages/flowhomeactivities/moviedetails.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 // Model
 import 'package:cinema_application/models/listallmovie.dart';
@@ -16,6 +17,7 @@ import 'package:cinema_application/models/film.dart';
 // Widgets
 import 'package:cinema_application/widgets/homebarbutton.dart';
 import 'package:cinema_application/widgets/sectionicon.dart';
+
 
 class Homepages extends StatefulWidget {
   const Homepages({super.key});
@@ -35,6 +37,9 @@ class _HomepagesState extends State<Homepages> {
     listmoviefirst = MovieList.getList();
     allmovie = AllMovie.getList();
     showMovie = Listallmovie.getMovie() ?? [];
+    Future.delayed(Duration.zero, () {
+      Provider.of<AuthProvider>(context, listen: false).checkLoginStatus();
+    });
   }
 
   @override
@@ -317,7 +322,7 @@ class _HomepagesState extends State<Homepages> {
                           movieTitle: allmovie[index].moviename,
                           movieDescription: allmovie[index].synopsis,
                           movieImage: allmovie[index].images,
-                          movieRating: allmovie[index].rating,
+                          movieRating: allmovie[index].rate,
                           movieYears: allmovie[index].years,
                           movieDuration: allmovie[index].time,
                           movieGenre: allmovie[index].genre,

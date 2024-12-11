@@ -309,7 +309,7 @@ class _SearhfieldpagesState extends State<Searchfieldpages> {
                   movieTitle: filteredMovie[index].moviename,
                   movieDescription: filteredMovie[index].synopsis,
                   movieImage: filteredMovie[index].images,
-                  movieRating: filteredMovie[index].rating,
+                  movieRating: filteredMovie[index].rate,
                   movieYears: filteredMovie[index].years,
                   movieDuration: filteredMovie[index].time,
                   movieGenre: filteredMovie[index].genre,
