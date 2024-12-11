@@ -1,9 +1,9 @@
 import 'package:cinema_application/pages/auth/auth.dart';
-import 'package:cinema_application/pages/searchfieldpages.dart';
+import 'package:cinema_application/pages/flowhomeactivities/searchfieldpages.dart';
+import 'package:cinema_application/pages/profilepages.dart';
 import 'package:flutter/material.dart';
 import 'package:cinema_application/pages/accountflow/accountsetup.dart';
-import 'package:flutter/material.dart';
-import 'package:cinema_application/pages/searchfieldpages.dart';
+import 'package:provider/provider.dart';
 
 class HomeBarButton extends StatelessWidget implements PreferredSizeWidget {
   final String title;

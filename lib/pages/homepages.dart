@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 // Package
-import 'package:cinema_application/pages/detailmoviepages.dart';
+import 'package:cinema_application/pages/auth/auth.dart';
+import 'package:cinema_application/pages/flowhomeactivities/detailmoviepages.dart';
 import 'package:cinema_application/pages/flowhomeactivities/exploremovies.dart';
 import 'package:cinema_application/pages/flowhomeactivities/moviedetails.dart';
 import 'package:flutter/material.dart';
