@@ -1,10 +1,16 @@
+
 import 'package:cinema_application/pages/accountflow/accountsetup.dart';
+
+import 'dart:io';
+
+
 import 'package:cinema_application/pages/accountflow/db_accounthelper.dart';
 import 'package:cinema_application/pages/dbhelper.dart';
 import 'package:cinema_application/pages/editactivities/editprofile.dart';
 import 'package:cinema_application/widgets/mainpagesbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePages extends StatefulWidget {
   const ProfilePages({super.key});
@@ -16,11 +22,20 @@ class ProfilePages extends StatefulWidget {
 class _ProfilePagesState extends State<ProfilePages> {
   bool _isLoggedIn = false; // Track login state
   Map<String, dynamic>? _userDetails; // Store user details
+  String? picturepath;
 
   @override
   void initState() {
     super.initState();
     _checkLoginStatus();
+    loadPicture();
+  }
+
+  Future<void> loadPicture() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      picturepath = pref.getString('profile_image');
+    });
   }
 
   void _checkLoginStatus() async {
@@ -178,7 +193,10 @@ class _ProfilePagesState extends State<ProfilePages> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: CircleAvatar(
                   radius: 24,
-                  backgroundImage: AssetImage('assets/images/pngwing.com.png'),
+                  backgroundImage: picturepath != null
+                      ? FileImage(File(picturepath!))
+                      : AssetImage('assets/images/pngwing.com.png')
+                          as ImageProvider,
                 ),
               ),
               // Name and Email

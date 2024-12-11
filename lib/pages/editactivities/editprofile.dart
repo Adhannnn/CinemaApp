@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:cinema_application/pages/accountflow/db_accounthelper.dart';
 import 'package:cinema_application/pages/dbhelper.dart';
 import 'package:cinema_application/widgets/custombackbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Editprofile extends StatefulWidget {
   const Editprofile({super.key});
@@ -13,11 +17,60 @@ class Editprofile extends StatefulWidget {
 class _EditprofileState extends State<Editprofile> {
   bool _isLoggedIn = false; // Track login state
   Map<String, dynamic>? _userDetails; // Store user details
+  File? image;
+  String? profileimagepath;
 
   @override
   void initState() {
     super.initState();
     _checkLoginStatus();
+    loadPicture();
+  }
+
+  Future<void> loadPicture() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      profileimagepath = pref.getString('profile_image');
+    });
+  }
+
+  Future<void> pickPicture(ImageSource source) async {
+    final pickFile = await ImagePicker().pickImage(source: source);
+    if (pickFile != null) {
+      setState(() {
+        image = File(pickFile.path);
+        profileimagepath = pickFile.path;
+      });
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.setString('profile_image', pickFile.path);
+    }
+  }
+
+  void showimage() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: Icon(Icons.camera_alt),
+            title: Text('Take a Photo'),
+            onTap: () {
+              Navigator.of(context).pop();
+              pickPicture(ImageSource.camera);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.photo_library),
+            title: Text('Choose from Gallery'),
+            onTap: () {
+              Navigator.of(context).pop();
+              pickPicture(ImageSource.gallery);
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   void _checkLoginStatus() async {
@@ -61,37 +114,42 @@ class _EditprofileState extends State<Editprofile> {
                 // Profile Picture
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('assets/images/pngwing.com.png'),
+                  backgroundImage: profileimagepath != null
+                      ? FileImage(File(profileimagepath!))
+                      : AssetImage('assets/images/pngwing.com.png')
+                          as ImageProvider,
                 ),
                 // Edit Icon
                 Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      color: Color(0xffA7D4CB),
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.black),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(2, 4),
-                          blurRadius: 4,
-                          color: Colors.black.withOpacity(0.2),
+                    bottom: 0,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: showimage,
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          color: Color(0xffA7D4CB),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.black),
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(2, 4),
+                              blurRadius: 4,
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.edit,
-                        size: 20,
-                        color: Colors.black,
+                        child: Center(
+                          child: Icon(
+                            Icons.edit,
+                            size: 20,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
+                    )),
               ],
             ),
           ),
@@ -114,10 +172,9 @@ class _EditprofileState extends State<Editprofile> {
                       ? _userDetails!['email']
                       : 'Email not available',
                   style: TextStyle(
-                    fontFamily: 'Montserrat-Medium',
-                    fontSize: 15,
-                    color: Color(0xff6A958C)
-                  ),
+                      fontFamily: 'Montserrat-Medium',
+                      fontSize: 15,
+                      color: Color(0xff6A958C)),
                 )
               ],
             ),
