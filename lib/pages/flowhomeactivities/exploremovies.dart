@@ -32,13 +32,14 @@ class _ExploreMoviesState extends State<ExploreMovies> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5F0E0),
+      backgroundColor: const Color.fromARGB(255, 255, 253, 247),
       appBar: CustomBackButton(
         title: "",
         showBottomBorder: false,
         trailingButton: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Location button
             Container(
               margin:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 13.5),
@@ -73,6 +74,7 @@ class _ExploreMoviesState extends State<ExploreMovies> {
                 ),
               ),
             ),
+            // search button
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),
               width: 36,
@@ -105,34 +107,49 @@ class _ExploreMoviesState extends State<ExploreMovies> {
       body: Column(
         children: [
           const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomButton(
-                text: 'Now',
-                isClicked: !isVoucherClicked,
-                onPressed: () => _toggleButton(),
+          Container(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 4),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Color.fromARGB(255, 14, 37, 34),
+                  width: 1.2,
+                ),
               ),
-              const SizedBox(width: 5),
-              CustomButton(
-                text: 'Upcoming',
-                isClicked: isVoucherClicked,
-                onPressed: () => _toggleButton(),
-              ),
-            ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  text: 'Now',
+                  isClicked: !isVoucherClicked,
+                  onPressed: () => _toggleButton(),
+                ),
+                const SizedBox(width: 5),
+                CustomButton(
+                  text: 'Upcoming',
+                  isClicked: isVoucherClicked,
+                  onPressed: () => _toggleButton(),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 10),
+
           // Movie List Display
           Expanded(
-            child: ListView.builder(
-              itemCount:
-                  isVoucherClicked ? upcomingMovies.length : nowMovies.length,
-              itemBuilder: (context, index) {
-                final movie =
-                    isVoucherClicked ? upcomingMovies[index] : nowMovies[index];
-                return _movieCard(movie);
-              },
-            ),
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 28),
+              child: ListView.builder(
+                itemCount:
+                    isVoucherClicked ? upcomingMovies.length : nowMovies.length,
+                itemBuilder: (context, index) {
+                  final movie =
+                      isVoucherClicked ? upcomingMovies[index] : nowMovies[index];
+                  return _movieCard(movie);
+                },
+              ),
+            )
           ),
         ],
       ),
@@ -141,16 +158,16 @@ class _ExploreMoviesState extends State<ExploreMovies> {
 
   Widget _movieCard(AllMovie movie) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+      padding: const EdgeInsets.fromLTRB(4, 4, 8, 4),
       decoration: BoxDecoration(
-        color: const Color(0xffF7C14D),
-        borderRadius: BorderRadius.circular(16),
+        color: const Color.fromARGB(255, 255, 196, 64),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.black),
         boxShadow: [
           BoxShadow(
-            offset: const Offset(3, 5),
-            color: Colors.black.withOpacity(0.1),
+            offset: const Offset(1.6, 2.8),
+            color: Colors.black.withOpacity(1),
           ),
         ],
       ),
@@ -205,9 +222,9 @@ class _ExploreMoviesState extends State<ExploreMovies> {
                               movie.rate,
                               style: const TextStyle(
                                 color: Color(0xffFFFDF7),
-                                fontFamily: "Montserrat-SemiBold",
+                                fontFamily: "Montserrat",
                                 fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w700,
                                 letterSpacing: 0.12,
                               ),
                             ),

@@ -18,19 +18,30 @@ class _CustomButtonState extends State<CustomButton> {
     return GestureDetector(
       onTap: widget.onPressed,
       child: Container(
-        width: 92,
-        height: 31,
+        width: 102,
+        height: 36,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: widget.isClicked ? Colors.black : const Color(0xffF5F0E0),
-          border: Border.all(color: const Color(0xff6A958C)),
-          boxShadow: const [BoxShadow(offset: Offset(2, 1))],
+          color: widget.isClicked ? Color.fromARGB(255, 14, 37, 34) :  Color.fromARGB(255, 255, 253, 247),
+          border: Border.all(
+            color: widget.isClicked ? Color.fromARGB(255, 14, 37, 34) :  Color.fromARGB(255, 106, 149, 140),
+            ),
+          boxShadow: [
+                  BoxShadow(
+                    offset: const Offset(1, 2),
+                    color: widget.isClicked ? Colors.black.withOpacity(1) : Color.fromARGB(255, 106, 149, 140),
+                  ),
+                ],
         ),
         child: Center(
           child: Text(
             widget.text,
             style: TextStyle(
-              color: widget.isClicked ? Colors.white : Colors.black,
+              color: widget.isClicked ? Colors.white : Color.fromARGB(255, 106, 149, 140),
+              fontFamily: "Montserrat",
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.12,
             ),
           ),
         ),
