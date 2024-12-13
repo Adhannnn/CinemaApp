@@ -1,5 +1,5 @@
+import 'package:cinema_application/widgets/customappbar.dart';
 import 'package:cinema_application/widgets/custombutton.dart';
-import 'package:cinema_application/widgets/mainpagesbar.dart';
 import 'package:flutter/material.dart';
 
 class Voucherpages extends StatefulWidget {
@@ -24,7 +24,7 @@ class _VoucherpagesState extends State<Voucherpages> {
       backgroundColor: const Color.fromARGB(255, 255, 253, 247),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(64),
-        child: MainPagesBar(title: 'My Vouchers'),
+        child: CustomAppBar(title: 'My Vouchers', showBackButton: false,),
       ),
       body: Column(
         children: [

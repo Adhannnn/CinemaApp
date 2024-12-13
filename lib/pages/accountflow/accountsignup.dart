@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cinema_application/pages/accountflow/accountlogin.dart';
 import 'package:cinema_application/pages/accountflow/db_accounthelper.dart';
-import 'package:cinema_application/widgets/custombackbutton.dart';
+import 'package:cinema_application/widgets/customappbar.dart';
 
 class Accountsignup extends StatefulWidget {
   const Accountsignup({super.key});
@@ -57,7 +57,7 @@ class _AccountsignupState extends State<Accountsignup> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 253, 247),
-      appBar: CustomBackButton(title: 'Sign up'),
+      appBar: CustomAppBar(title: 'Sign up'),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),

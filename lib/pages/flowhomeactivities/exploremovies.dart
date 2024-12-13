@@ -1,6 +1,6 @@
 import 'package:cinema_application/models/listmovie.dart';
 import 'package:cinema_application/pages/flowhomeactivities/searchfieldpages.dart';
-import 'package:cinema_application/widgets/custombackbutton.dart';
+import 'package:cinema_application/widgets/customappbar.dart';
 import 'package:cinema_application/widgets/custombutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,7 +34,7 @@ class _ExploreMoviesState extends State<ExploreMovies> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 253, 247),
-      appBar: CustomBackButton(
+      appBar: CustomAppBar(
         title: "",
         showBottomBorder: false,
         trailingButton: Row(

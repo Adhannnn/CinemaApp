@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:cinema_application/pages/auth/auth.dart';
 import 'package:cinema_application/pages/flowhomeactivities/detailmoviepages.dart';
 import 'package:cinema_application/pages/flowhomeactivities/exploremovies.dart';
-import 'package:cinema_application/pages/flowhomeactivities/moviedetails.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';

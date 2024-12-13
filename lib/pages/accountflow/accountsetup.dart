@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cinema_application/pages/accountflow/accountlogin.dart';
 import 'package:cinema_application/pages/accountflow/accountsignup.dart';
-import 'package:cinema_application/widgets/custombackbutton.dart';
+import 'package:cinema_application/widgets/customappbar.dart';
 
 class Accountsetup extends StatelessWidget {
   const Accountsetup({super.key});
@@ -10,7 +10,7 @@ class Accountsetup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 253, 247),
-      appBar: CustomBackButton(title: ''),
+      appBar: CustomAppBar(title: ''),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
@@ -20,11 +20,12 @@ class Accountsetup extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               // Logo
-              Text('Cinema Time',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
+              Text(
+                'Cinema Time',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
                 )
               ),
 

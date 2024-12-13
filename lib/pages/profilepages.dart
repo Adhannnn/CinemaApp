@@ -1,16 +1,16 @@
 import 'dart:io';
 import 'dart:ui';
-import 'package:cinema_application/pages/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:cinema_application/pages/homescreen.dart';
 import 'package:cinema_application/pages/accountflow/accountsetup.dart';
 import 'package:cinema_application/pages/accountflow/db_accounthelper.dart';
 import 'package:cinema_application/pages/dbhelper.dart';
 import 'package:cinema_application/pages/editactivities/editprofile.dart';
 
-import 'package:cinema_application/widgets/mainpagesbar.dart';
+import 'package:cinema_application/widgets/customappbar.dart';
 
 class ProfilePages extends StatefulWidget {
   const ProfilePages({super.key});
@@ -83,7 +83,7 @@ class _ProfilePagesState extends State<ProfilePages> {
       backgroundColor: Color.fromARGB(255, 255, 253, 247),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(64),
-        child: MainPagesBar(title: 'Profile'),
+        child: CustomAppBar(title: 'Profile', showBackButton: false,),
       ),
       body: SafeArea(
         child: Container(

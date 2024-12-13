@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cinema_application/widgets/mainpagesbar.dart';
+import 'package:cinema_application/widgets/customappbar.dart';
 
 class Transactionpages extends StatefulWidget {
   const Transactionpages({super.key});
@@ -16,7 +16,7 @@ Widget build(BuildContext context) {
     backgroundColor: const Color.fromARGB(255, 255, 253, 247),
     appBar: PreferredSize(
       preferredSize: const Size.fromHeight(64),
-      child: MainPagesBar(title: 'Transaction'),
+      child: CustomAppBar(title: 'Transaction', showBackButton: false),
     ),
     body: const Center(
       child: Text("Transaction Pages"),

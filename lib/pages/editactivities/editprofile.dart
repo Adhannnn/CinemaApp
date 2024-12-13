@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cinema_application/pages/accountflow/db_accounthelper.dart';
 import 'package:cinema_application/pages/dbhelper.dart';
-import 'package:cinema_application/widgets/custombackbutton.dart';
+import 'package:cinema_application/widgets/customappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -99,7 +99,7 @@ class _EditprofileState extends State<Editprofile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomBackButton(title: 'Edit Profile'),
+      appBar: CustomAppBar(title: 'Edit Profile'),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
