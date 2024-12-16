@@ -1,5 +1,7 @@
 import 'package:cinema_application/models/listmovie.dart';
+import 'package:cinema_application/pages/flowhomeactivities/detailmovie_upcoming.dart';
 import 'package:cinema_application/pages/flowhomeactivities/searchfieldpages.dart';
+import 'package:cinema_application/pages/flowhomeactivities/detailmoviepages.dart';
 import 'package:cinema_application/widgets/custombackbutton.dart';
 import 'package:cinema_application/widgets/custombutton.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +77,7 @@ class _ExploreMoviesState extends State<ExploreMovies> {
                 ),
               ),
             ),
-            // search button
+            // Search button
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 13.5),
               width: 36,
@@ -97,9 +99,7 @@ class _ExploreMoviesState extends State<ExploreMovies> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => Searchfieldpages()
-                    )
+                    MaterialPageRoute(builder: (context) => Searchfieldpages()),
                   );
                 },
                 icon: const Icon(
@@ -131,13 +131,13 @@ class _ExploreMoviesState extends State<ExploreMovies> {
                 CustomButton(
                   text: 'Now',
                   isClicked: !isVoucherClicked,
-                  onPressed: () => _toggleButton(),
+                  onPressed: _toggleButton,
                 ),
                 const SizedBox(width: 5),
                 CustomButton(
                   text: 'Upcoming',
                   isClicked: isVoucherClicked,
-                  onPressed: () => _toggleButton(),
+                  onPressed: _toggleButton,
                 ),
               ],
             ),
@@ -151,12 +151,47 @@ class _ExploreMoviesState extends State<ExploreMovies> {
                 itemCount:
                     isVoucherClicked ? upcomingMovies.length : nowMovies.length,
                 itemBuilder: (context, index) {
-                  final movie =
-                      isVoucherClicked ? upcomingMovies[index] : nowMovies[index];
-                  return _movieCard(movie);
+                  final movie = isVoucherClicked
+                      ? upcomingMovies[index]
+                      : nowMovies[index];
+                  return GestureDetector(
+                    onTap: () {
+                      if (!isVoucherClicked) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Moviedetail(
+                              movieTitle: movie.moviename,
+                              movieDescription: movie.synopsis,
+                              movieImage: movie.images,
+                              movieRating: movie.rate,
+                              movieYears: movie.years,
+                              movieDuration: movie.time,
+                              movieGenre: movie.genre,
+                              movieWatchlist: movie.watchlist,
+                            ),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UpcomingDetail(
+                                    movieTitle: movie.moviename,
+                                    movieDescription: movie.synopsis,
+                                    movieImage: movie.images,
+                                    movieGenre: movie.genre,
+                                    movieYear: movie.years,
+                                    movieDuration: movie.time,
+                                    movieRating: movie.rate,
+                                    movieWatchlist: movie.watchlist)));
+                      }
+                    },
+                    child: _movieCard(movie),
+                  );
                 },
               ),
-            )
+            ),
           ),
         ],
       ),

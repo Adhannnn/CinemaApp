@@ -4,21 +4,18 @@ import 'dart:ui';
 import 'package:cinema_application/pages/auth/auth.dart';
 import 'package:cinema_application/pages/flowhomeactivities/detailmoviepages.dart';
 import 'package:cinema_application/pages/flowhomeactivities/exploremovies.dart';
-import 'package:cinema_application/pages/flowhomeactivities/moviedetails.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 // Model
-import 'package:cinema_application/models/listallmovie.dart';
 import 'package:cinema_application/models/listmovie.dart';
 import 'package:cinema_application/models/film.dart';
 
 // Widgets
 import 'package:cinema_application/widgets/homebarbutton.dart';
 import 'package:cinema_application/widgets/sectionicon.dart';
-
 
 class Homepages extends StatefulWidget {
   const Homepages({super.key});
@@ -30,14 +27,12 @@ class Homepages extends StatefulWidget {
 class _HomepagesState extends State<Homepages> {
   late List<MovieList> listmoviefirst;
   late List<AllMovie> allmovie;
-  late List<Listallmovie> showMovie = [];
 
   @override
   void initState() {
     super.initState();
     listmoviefirst = MovieList.getList();
     allmovie = AllMovie.getList();
-    showMovie = Listallmovie.getMovie() ?? [];
     Future.delayed(Duration.zero, () {
       Provider.of<AuthProvider>(context, listen: false).checkLoginStatus();
     });
@@ -143,11 +138,11 @@ class _HomepagesState extends State<Homepages> {
           buildDivider(),
           SectionWithIcon(
               title: 'Vouchers',
-              value: '1',
+              value: '0',
               icon: 'assets/icon/coupunicon.svg'),
           buildDivider(),
           SectionWithIcon(
-              title: 'Coupons', value: '1', icon: 'assets/icon/discount.svg')
+              title: 'Coupons', value: '0', icon: 'assets/icon/discount.svg')
         ],
       ),
     );
@@ -432,16 +427,35 @@ class _HomepagesState extends State<Homepages> {
                             childAspectRatio:
                                 0.7, // Set a consistent aspect ratio
                           ),
-                          itemCount: showMovie.length,
+                          itemCount: allmovie.length,
                           itemBuilder: (context, index) {
-                            var movie = showMovie[index];
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(6),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(movie.pathImage),
-                                    fit: BoxFit.cover,
+                            var movie = allmovie[index];
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Moviedetail(
+                                            movieTitle:
+                                                allmovie[index].moviename,
+                                            movieDescription:
+                                                allmovie[index].synopsis,
+                                            movieImage: allmovie[index].images,
+                                            movieRating: allmovie[index].rate,
+                                            movieYears: allmovie[index].years,
+                                            movieDuration: allmovie[index].time,
+                                            movieGenre: allmovie[index].genre,
+                                            movieWatchlist:
+                                                allmovie[index].watchlist)));
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(movie.images),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),

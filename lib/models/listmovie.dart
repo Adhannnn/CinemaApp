@@ -111,7 +111,19 @@ class AllMovie {
         synopsis:
             "Superman, a cub reporter in Metropolis, struggles to balance his Kryptonian heritage with his human upbringing. He embodies truth, justice, and the American way, guided by human kindness in a world that sees kindness as old-fashioned. ",
         years: '2025',
-        watchlist: ''));
+        watchlist: '-'));
+
+    listing.add(AllMovie(
+        moviename: '2nd Miracle in Cell \nNo. 07',
+        images: 'assets/images/2ndmiracle.jpeg',
+        rate: '-',
+        genre: 'Drama',
+        time: '-',
+        rating: '-',
+        synopsis:
+            "2nd Miracle in Cell No. 7 will continue the story of Kartika (Graciella Abigail) after losing her father, Dodo (Vino G. Bastian), who was sentenced to death. Two years have passed since the tragic event, and Kartika now lives with Hendro (Denny Sumargo) and Linda. (Agla Artalidia). The drama will center around Kartika's story, who continues to be smuggled into the cell to meet the inmates who are Dodo's friends. All parties agreed to hide the fact that Dodo had died in order to protect Kartika's feelings.",
+        years: '2025',
+        watchlist: "-"));
 
     return listing;
   }
