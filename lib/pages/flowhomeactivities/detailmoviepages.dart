@@ -1,3 +1,4 @@
+import 'package:cinema_application/pages/flowhomeactivities/bookingseats.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -38,6 +39,7 @@ class _MoviedetailState extends State<Moviedetail> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+
             // Movie Banner Image
             Stack(
               children: [
@@ -88,6 +90,7 @@ class _MoviedetailState extends State<Moviedetail> {
                 ),
               ],
             ),
+
             // Movie Details
             Padding(
               padding: const EdgeInsets.all(0.0),
@@ -198,7 +201,7 @@ class _MoviedetailState extends State<Moviedetail> {
                     padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                      color: Color(0xffA7D4CB),
+                      color: Color.fromARGB(255, 167, 212, 203),
                       border: Border(
                         top: BorderSide(color: Colors.black),
                         bottom: BorderSide(color: Colors.black),
@@ -251,12 +254,11 @@ class _MoviedetailState extends State<Moviedetail> {
               ),
             ),
             const SizedBox(height: 13),
-            // Schedule Section
 
+            // Schedule Section
             Container(
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 251, 255, 254),
                 border: Border(
                   bottom: BorderSide(color: Colors.black),
                 ),
@@ -446,7 +448,7 @@ class _MoviedetailState extends State<Moviedetail> {
                               children: List.generate(4, (index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    // Handle showtime selection
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => BookingSeats()));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.symmetric(
