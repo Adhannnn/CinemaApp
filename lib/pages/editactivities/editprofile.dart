@@ -15,8 +15,8 @@ class Editprofile extends StatefulWidget {
 }
 
 class _EditprofileState extends State<Editprofile> {
-  bool _isLoggedIn = false; // Track login state
-  Map<String, dynamic>? _userDetails; // Store user details
+  bool _isLoggedIn = false;
+  Map<String, dynamic>? _userDetails;
   File? image;
   String? profileimagepath;
 
@@ -74,11 +74,9 @@ class _EditprofileState extends State<Editprofile> {
   }
 
   void _checkLoginStatus() async {
-    // Fetch the last logged-in account from the login table
     String? lastLoginEmail = await AccountHelper().getLastLoginAccount();
 
     if (lastLoginEmail != null) {
-      // Fetch user details from the users table
       final user = await DatabaseHelper().getUserByEmail(lastLoginEmail);
       if (user != null) {
         setState(() {
@@ -89,7 +87,6 @@ class _EditprofileState extends State<Editprofile> {
       }
     }
 
-    // If no account is logged in or no user details found
     setState(() {
       _isLoggedIn = false;
       _userDetails = null;
@@ -108,10 +105,8 @@ class _EditprofileState extends State<Editprofile> {
           Container(
             margin: EdgeInsets.only(top: 20),
             child: Stack(
-              alignment:
-                  Alignment.bottomRight, // Align the icon to bottom-right
+              alignment: Alignment.bottomRight,
               children: [
-                // Profile Picture
                 CircleAvatar(
                   radius: 50,
                   backgroundImage: profileimagepath != null
@@ -119,66 +114,100 @@ class _EditprofileState extends State<Editprofile> {
                       : AssetImage('assets/images/pngwing.com.png')
                           as ImageProvider,
                 ),
-                // Edit Icon
                 Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: showimage,
-                      child: Container(
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                          color: Color(0xffA7D4CB),
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.black),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: Offset(2, 4),
-                              blurRadius: 4,
-                              color: Colors.black.withOpacity(0.2),
-                            ),
-                          ],
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.edit,
-                            size: 20,
-                            color: Colors.black,
+                  bottom: 0,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: showimage,
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: Color(0xffA7D4CB),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.black),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(2, 4),
+                            blurRadius: 4,
+                            color: Colors.black.withOpacity(0.2),
                           ),
-                        ),
+                        ],
                       ),
-                    )),
+                      child: Center(
+                        child: Icon(Icons.edit, size: 20, color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          const SizedBox(height: 16), // Space between the picture and the text
-          // Name
-          Container(
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                Text(
-                  "${_userDetails?['name'] ?? 'User'}",
-                  style: TextStyle(
-                      fontFamily: 'Montserrat-SemiBold',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      letterSpacing: 1.2),
+          const SizedBox(height: 16),
+
+          // Scrollable Text Container
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    buildInformation(
+                        "Name", "${_userDetails?['name'] ?? 'User'}"),
+                    buildInformation("Email",
+                        _userDetails?['email'] ?? 'Email not available'),
+                    buildInformation("Phone Number",
+                        "${_userDetails?['phoneNumber'] ?? 'N/A'}"),
+                  ],
                 ),
-                Text(
-                  _userDetails != null
-                      ? _userDetails!['email']
-                      : 'Email not available',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: 15,
-                      color: Color(0xff6A958C)),
-                )
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildInformation(String label, String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "     $label",
+            style: TextStyle(
+                fontSize: 12,
+                color: Colors.black87,
+                fontWeight: FontWeight.w500),
+          ),
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.only(top: 4),
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                  color: Color.fromARGB(255, 14, 37, 34), width: 1.2),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(2, 4),
+                  blurRadius: 4,
+                ),
               ],
             ),
-          )
+            child: Text(
+              text,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
         ],
       ),
     );
